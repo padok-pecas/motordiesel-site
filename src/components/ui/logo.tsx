@@ -1,0 +1,52 @@
+import Image from "next/image";
+
+import { cn } from "@/lib/cn";
+
+// Dimensões reais dos arquivos oficiais em public/brand (não alterados).
+const MOTORDIESEL = { src: "/brand/motordiesel.png", width: 4145, height: 1072 };
+// O selo vermelho ocupa as linhas 0–835; abaixo dele vem o slogan em tom claro (#ECF3FF),
+// que some sobre fundo branco. A variante "badge" mostra só o selo, recortado por CSS.
+const BADGE_HEIGHT = 840;
+const PADOK = { src: "/brand/grupo-padok.png", width: 1937, height: 470 };
+
+type Props = {
+  className?: string;
+  preload?: boolean;
+  /** Carrega mesmo fora da tela (ex.: dentro de um bloco oculto no celular). */
+  eager?: boolean;
+};
+
+/** Selo MotorDiesel sem o slogan — para fundos claros. */
+export function MotorDieselBadge({ className, preload, eager }: Props) {
+  return (
+    <span
+      className={cn("block overflow-hidden", className)}
+      style={{ aspectRatio: `${MOTORDIESEL.width} / ${BADGE_HEIGHT}` }}
+    >
+      <Image
+        {...MOTORDIESEL}
+        alt="MotorDiesel"
+        preload={preload}
+        loading={eager ? "eager" : undefined}
+        className="block h-auto w-full max-w-none"
+      />
+    </span>
+  );
+}
+
+/** Logo completo, com o slogan — somente sobre fundos escuros. */
+export function MotorDieselLogo({ className }: Props) {
+  return (
+    <Image
+      {...MOTORDIESEL}
+      alt="MotorDiesel — Do leve ao pesado, simplesmente a melhor"
+      className={cn("h-auto", className)}
+    />
+  );
+}
+
+export function GrupoPadokLogo({ className, preload }: Props) {
+  return (
+    <Image {...PADOK} alt="Grupo Padok" preload={preload} className={cn("h-auto", className)} />
+  );
+}

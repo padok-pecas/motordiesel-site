@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+/*
+ * TOKENS DA MARCA — ajuste as cores aqui.
+ * --brand-red: extraído do logo oficial MotorDiesel (cor sólida dominante #DB1D21).
+ * --brand-ice: tom das letras do logo; usado como superfície clara de apoio.
+ */
+:root {
+  --brand-red: #db1d21;
+  --brand-red-strong: color-mix(in oklab, var(--brand-red) 82%, black);
+  --brand-red-soft: color-mix(in oklab, var(--brand-red) 8%, white);
+  --brand-ice: #ecf3ff;
+
+  --graphite: #1d2024;
+  --graphite-soft: #2a2e33;
+  --ink: #121417;
+  --steel: #5b6470;
+  --line: #e4e7eb;
+  --mist: #f5f6f8;
+  --paper: #ffffff;
+}
+
+@theme inline {
+  --color-brand: var(--brand-red);
+  --color-brand-strong: var(--brand-red-strong);
+  --color-brand-soft: var(--brand-red-soft);
+  --color-ice: var(--brand-ice);
+  --color-graphite: var(--graphite);
+  --color-graphite-soft: var(--graphite-soft);
+  --color-ink: var(--ink);
+  --color-steel: var(--steel);
+  --color-line: var(--line);
+  --color-mist: var(--mist);
+  --color-paper: var(--paper);
+
+  --font-sans: var(--font-archivo);
+  --font-display: var(--font-saira);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+  ::selection {
+    background: var(--brand-red);
+    color: white;
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand-red);
+    outline-offset: 3px;
+  }
+}
+
+/* Títulos: Saira levemente expandida e inclinada, ecoando o desenho do logo. */
+@utility font-display-wide {
+  font-family: var(--font-saira);
+  font-variation-settings: "wdth" 112;
+}
+
+/* Recorte em paralelogramo, mesmo ângulo do selo MotorDiesel. */
+@utility clip-slant {
+  clip-path: polygon(6% 0, 100% 0, 94% 100%, 0 100%);
+}
+@utility clip-slant-left {
+  clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/*
+ * Ritmo vertical único das seções. Mudar aqui ajusta o respiro da página inteira —
+ * evita paddings diferentes empilhados entre blocos vizinhos.
+ */
+@utility section-y {
+  padding-block: 3.5rem;
+  @media (width >= 64rem) {
+    padding-block: 5rem;
+  }
+}
+
+/* ---------- Movimento (discreto, respeita prefers-reduced-motion) ---------- */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes reveal {
+  from {
+    opacity: 0.15;
+    transform: translateY(20px);
+  }
+}
+@keyframes wipe {
+  from {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+  to {
+    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-rise {
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .animate-wipe {
+    animation: wipe 1.1s cubic-bezier(0.7, 0, 0.2, 1) both;
+  }
+  .animate-toast {
+    animation: toast-in 0.2s ease-out both;
+  }
+}
+
+/*
+ * Revelação ao rolar, 100% CSS (scroll-driven animation): não depende de JavaScript nem de
+ * hidratação. O efeito só existe enquanto o elemento atravessa a borda inferior da tela.
+ * `forwards` (e não `both`) é essencial: antes de entrar na tela o elemento fica no estado
+ * normal, visível — capturas de página inteira, impressão e saltos por âncora nunca mostram
+ * áreas vazias. Sem suporte ou com `prefers-reduced-motion: reduce`, não há animação.
+ *
+ * Antes, o conteúdo era escondido por CSS até o JS confirmar a entrada na tela — quando o JS
+ * atrasava ou falhava, seções inteiras ficavam vazias.
+ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal] {
+      animation: reveal linear forwards;
+      animation-timeline: view();
+      animation-range: entry 0% entry calc(55% + var(--reveal-stagger, 0%));
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
