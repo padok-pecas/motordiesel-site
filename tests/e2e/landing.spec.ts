@@ -122,6 +122,40 @@ test("conteúdo aparece mesmo sem JavaScript (sem áreas vazias)", async ({ brow
   await context.close();
 });
 
+test("hero: vídeo de fundo mudo, em loop e decorativo", async ({ page, request }) => {
+  const file = await request.get("/videos/motor-diesel-hero.mp4");
+  expect(file.status()).toBe(200);
+  expect(file.headers()["content-type"]).toContain("video/mp4");
+
+  // O Chromium do Playwright pode não ter o codec H.264: aí o vídeo sai e fica o fundo.
+  const playable = await page.evaluate(() =>
+    document.createElement("video").canPlayType("video/mp4"),
+  );
+  test.skip(!playable, "navegador de teste sem suporte a MP4");
+
+  const video = page.locator("#inicio video");
+  await expect(video).toHaveAttribute("src", "/videos/motor-diesel-hero.mp4");
+  await expect(video).toHaveAttribute("aria-hidden", "true");
+  for (const attr of ["autoplay", "loop", "playsinline"]) {
+    await expect(video).toHaveAttribute(attr, "");
+  }
+  expect(await video.evaluate((el: HTMLVideoElement) => el.muted)).toBe(true);
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+});
+
+test("hero: com movimento reduzido, o vídeo não é carregado", async ({ browser }) => {
+  const context = await browser.newContext({ reducedMotion: "reduce" });
+  const page = await context.newPage();
+  const requested: string[] = [];
+  page.on("request", (req) => requested.push(req.url()));
+  await page.goto("/");
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  await page.waitForLoadState("networkidle");
+  await expect(page.locator("#inicio video")).toHaveCount(0);
+  expect(requested.some((url) => url.includes("/videos/"))).toBe(false);
+  await context.close();
+});
+
 test("menu mobile abre, navega e fecha com Escape", async ({ page, isMobile }) => {
   test.skip(!isMobile, "apenas mobile");
   const toggle = page.getByRole("button", { name: "Abrir menu" });
