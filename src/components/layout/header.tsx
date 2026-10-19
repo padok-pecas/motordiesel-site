@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { InstagramIcon } from "@/components/ui/brand-icons";
-import { GrupoPadokLogo, MotorDieselBadge } from "@/components/ui/logo";
+import { PadokMotorDieselLogo } from "@/components/ui/logo";
 import { StoreButton } from "@/components/ui/store-button";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { site } from "@/content/site";
@@ -52,14 +52,10 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:h-18 lg:px-10">
-        {/* Assinatura: Grupo Padok | MotorDiesel */}
-        <div className="flex shrink-0 items-center gap-3 sm:gap-4">
-          <GrupoPadokLogo preload className="w-[4.5rem] sm:w-24" />
-          <span className="h-8 w-px bg-line sm:h-9" aria-hidden />
-          <a href="#inicio" aria-label="MotorDiesel — início">
-            <MotorDieselBadge preload className="w-32 sm:w-44" />
-          </a>
-        </div>
+        {/* Assinatura: Padok Peças | MotorDiesel */}
+        <a href="#inicio" aria-label="MotorDiesel — início" className="shrink-0">
+          <PadokMotorDieselLogo preload className="w-60 sm:w-80 lg:w-96" />
+        </a>
 
         <nav aria-label="Principal" className="hidden xl:block">
           <ul className="flex items-center gap-8">

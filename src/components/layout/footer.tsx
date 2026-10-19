@@ -8,7 +8,7 @@ import {
   YouTubeIcon,
 } from "@/components/ui/brand-icons";
 import { Container } from "@/components/ui/container";
-import { GrupoPadokLogo, MotorDieselLogo } from "@/components/ui/logo";
+import { PadokMotorDieselStackedLogo } from "@/components/ui/logo";
 import { StoreButton } from "@/components/ui/store-button";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { site } from "@/content/site";
@@ -107,14 +107,7 @@ export function Footer() {
 
       <Container className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.9fr_1.1fr_1fr] lg:gap-8 lg:py-14">
         <div>
-          <MotorDieselLogo className="w-56 max-w-full" />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed">{site.slogan}.</p>
-          <div className="mt-6 flex items-center gap-3 border-t border-white/10 pt-5">
-            <span className="text-[0.65rem] font-semibold tracking-[0.2em] text-white/50 uppercase">
-              Uma empresa do
-            </span>
-            <GrupoPadokLogo className="w-28" />
-          </div>
+          <PadokMotorDieselStackedLogo className="w-52 max-w-full sm:w-60" />
         </div>
 
         <nav aria-label="Rodapé">
