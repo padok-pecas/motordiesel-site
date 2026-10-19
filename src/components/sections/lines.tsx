@@ -127,12 +127,6 @@ export function Lines() {
             </Reveal>
           </article>
         ))}
-
-        {/* Corte diagonal vermelho na emenda entre as linhas */}
-        <span
-          className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-2 -translate-x-1/2 -skew-x-12 bg-brand md:block"
-          aria-hidden
-        />
       </div>
     </section>
   );

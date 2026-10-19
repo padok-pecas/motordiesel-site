@@ -27,7 +27,7 @@ export const site = siteSchema.parse({
   legalName: null,
   cnpj: null,
   about:
-    "Fundada em dezembro de 1995 pelo Roberval Lira, a Motordiesel construiu sua trajetória com compromisso com a qualidade e a excelência no atendimento. Hoje, trabalhamos com peças para carros, picapes, vans, caminhões e máquinas pesadas, atendendo às linhas leve e pesada com eficiência logística para clientes em todo o Brasil.",
+    "A MotorDiesel constituída em dezembro de 1995 a partir do espírito visionário e empreendedor de Roberval Lira. Com 31 anos de expertise, somos referência no segmento de peças para automóveis, caminhonetes, vans, caminhões, ônibus e micro-ônibus. Em 2025 nasceu a Padok, uma marca única, mais curta, mais memorável, mais forte visualmente, mais moderna e mais expansível. Com intuito de atender tanto o atacado, varejo, linha leve, linha pesada, peças elétricas e peças mecânicas.",
 
   mercadoLivre: {
     // Link provisório informado pela empresa em 17/10/2026 (anúncio no Mercado Livre).

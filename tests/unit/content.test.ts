@@ -3,9 +3,9 @@ import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { categories, demoProducts } from "@/content/catalog";
+import { demoProducts, segments } from "@/content/catalog";
 import { imageCredits } from "@/content/credits";
-import { categorySchema, demoProductSchema, siteSchema } from "@/content/schema";
+import { demoProductSchema, segmentSchema, siteSchema } from "@/content/schema";
 import { site } from "@/content/site";
 import { getStoreUrl, getWhatsappUrl } from "@/lib/store";
 
@@ -104,14 +104,36 @@ describe("catálogo demonstrativo", () => {
     expect(lines.has("Leve")).toBe(true);
     expect(lines.has("Pesada")).toBe(true);
   });
+});
 
-  it("categorias têm imagens existentes e ids únicos", () => {
-    const ids = new Set(categories.map((category) => category.id));
-    expect(ids.size).toBe(categories.length);
-    for (const category of categories) {
-      expect(categorySchema.safeParse(category).success).toBe(true);
-      expect(existsSync(join(publicDir, category.image)), category.image).toBe(true);
+describe("segmentos", () => {
+  it("são válidos, com ids únicos e fotos existentes (quando houver)", () => {
+    const ids = new Set(segments.map((segment) => segment.id));
+    expect(ids.size).toBe(segments.length);
+    for (const segment of segments) {
+      expect(segmentSchema.safeParse(segment).success).toBe(true);
+      if (segment.image)
+        expect(existsSync(join(publicDir, segment.image.src)), segment.image.src).toBe(true);
     }
+  });
+
+  it("cobrem a linha leve e a pesada da vitrine", () => {
+    const lines = new Set(segments.map((segment) => segment.line));
+    expect(lines).toEqual(new Set(["leve", "pesada"]));
+  });
+
+  it("não aceitam linha fora dos filtros da vitrine", () => {
+    const base = { id: "x", name: "X", description: "X", line: "leve", image: null };
+    expect(segmentSchema.safeParse(base).success).toBe(true);
+    expect(segmentSchema.safeParse({ ...base, line: "motos" }).success).toBe(false);
+  });
+
+  it("foto exige caminho em public/images e enquadramento válido", () => {
+    const base = { id: "x", name: "X", description: "X", line: "leve" };
+    const withImage = (image: unknown) => segmentSchema.safeParse({ ...base, image }).success;
+    expect(withImage({ src: "/images/linha-leve.webp", position: "50% 85%" })).toBe(true);
+    expect(withImage({ src: "/images/linha-leve.webp", position: "center" })).toBe(false);
+    expect(withImage({ src: "https://exemplo.com/foto.webp", position: "50% 50%" })).toBe(false);
   });
 });
 

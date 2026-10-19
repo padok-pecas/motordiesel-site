@@ -1,4 +1,5 @@
 import { Clock, Mail, MapPin, Phone, type LucideIcon } from "lucide-react";
+import Link from "next/link";
 
 import {
   FacebookIcon,
@@ -115,12 +116,12 @@ export function Footer() {
           <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-0.5 text-sm">
             {footerNavItems.map((item) => (
               <li key={item.href}>
-                <a
+                <Link
                   href={item.href}
                   className="inline-flex min-h-9 items-center transition-colors hover:text-white"
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

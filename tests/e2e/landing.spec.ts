@@ -53,6 +53,32 @@ test("“Encontrar minha peça” leva às categorias", async ({ page }) => {
   await expect(page.getByRole("heading", { name: /Navegue por categoria/i })).toBeInViewport();
 });
 
+test("categorias: quatro cards que abrem a vitrine já filtrada", async ({ page }) => {
+  const section = page.locator("#categorias");
+  const cards = section.locator("li article");
+  await expect(cards).toHaveCount(4);
+  for (const name of ["Automóveis", "Caminhonetes e vans", "Caminhões", "Ônibus e micro-ônibus"]) {
+    await expect(section.getByRole("heading", { level: 3, name })).toBeVisible();
+  }
+  const products = page.locator("#destaques li article");
+
+  await section.getByRole("link", { name: /caminhões na vitrine/i }).click();
+  await expect(page).toHaveURL(/#destaques$/);
+  await expect(page.getByRole("button", { name: "Linha pesada" })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await expect(products.filter({ hasText: "Vela de ignição" })).toHaveCount(0);
+
+  await page.goto("/#categorias");
+  await section.getByRole("link", { name: /automóveis na vitrine/i }).click();
+  await expect(page.getByRole("button", { name: "Linha leve" })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await expect(products.filter({ hasText: "Turbocompressor" })).toHaveCount(0);
+});
+
 test("produtos são demonstrativos, têm foto e não exibem preço", async ({ page }) => {
   const products = page.locator("#destaques li article");
   await expect(products).toHaveCount(8);
@@ -103,7 +129,7 @@ test("conteúdo aparece mesmo sem JavaScript (sem áreas vazias)", async ({ brow
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto("/");
-  for (const selector of ["#categorias li", "#linhas article", "#destaques li", "#sobre img"]) {
+  for (const selector of ["#categorias li", "#linhas article", "#destaques li"]) {
     const target = page.locator(selector).first();
     await target.scrollIntoViewIfNeeded();
     await page.evaluate(() => window.scrollBy(0, 200));
@@ -169,18 +195,30 @@ test("menu mobile abre, navega e fecha com Escape", async ({ page, isMobile }) =
 
   await toggle.click();
   await menu.getByRole("link", { name: "Como comprar" }).click();
-  await expect(menu).toBeHidden();
-  await expect(page).toHaveURL(/#como-comprar$/);
+  await expect(page).toHaveURL(/\/como-comprar$/);
+  await expect(page.getByRole("heading", { level: 1, name: /Como comprar/i })).toBeVisible();
+  await expect(page.locator("#menu-mobile")).toBeHidden();
 });
 
 test("todos os links internos levam a seções existentes", async ({ page }) => {
+  // Âncoras da própria página ("#id") e da home ("/#id") — estamos na home.
   const hrefs = await page
-    .locator('a[href^="#"]')
+    .locator('a[href^="#"], a[href^="/#"]')
     .evaluateAll((links) => [...new Set(links.map((link) => link.getAttribute("href")))]);
   expect(hrefs.length).toBeGreaterThan(5);
   for (const href of hrefs) {
-    await expect(page.locator(href!), href!).toHaveCount(1);
+    const id = href!.replace(/^\//, "");
+    await expect(page.locator(id), href!).toHaveCount(1);
   }
+});
+
+test("home não exibe mais “Como comprar” nem “Sobre” completos", async ({ page }) => {
+  await expect(page.locator("#como-comprar")).toHaveCount(0);
+  await expect(page.locator("#sobre")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: /Três passos até a sua peça/i })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: /Confiança de quem vive o motor/i })).toHaveCount(
+    0,
+  );
 });
 
 test("rodapé: navegação completa e “Contato” leva aos contatos", async ({ page }) => {

@@ -62,13 +62,13 @@ export function MarketplaceBand() {
       aria-labelledby="loja-title"
       className="relative isolate overflow-hidden bg-ink text-white"
     >
-      {/* Campo vermelho em diagonal + estrada ao fundo, discreta */}
+      {/* Campo vermelho em diagonal + fachada da loja ao fundo (à direita, o letreiro e o slogan) */}
       <Image
-        src="/images/cta-rodovia.webp"
+        src="/images/fachada-loja.webp"
         alt=""
         fill
         sizes="100vw"
-        className="-z-20 object-cover object-[70%_60%] opacity-40"
+        className="-z-20 object-cover object-center opacity-60"
       />
       <div
         className="absolute inset-0 -z-10 bg-gradient-to-br from-brand to-brand-strong lg:[clip-path:polygon(0_0,62%_0,52%_100%,0_100%)]"

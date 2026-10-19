@@ -112,14 +112,28 @@ export const siteSchema = z.object({
   reviews: reviewsSchema,
 });
 
-export const categorySchema = z.object({
-  id: z.string().regex(/^[a-z-]+$/),
-  name: z.string().min(1),
-  description: z.string().min(1),
-  image: z.string().startsWith("/images/"),
-  /** Link da categoria na loja; `null` até existir o endereço oficial. */
-  storeUrl: mercadoLivreUrl.nullable(),
-});
+/** Linhas da vitrine (os mesmos filtros de "Linha leve" e "Linha pesada"). */
+export const showcaseLines = ["leve", "pesada"] as const;
+
+/** Segmento de veículos atendido pela loja (seção "Navegue por segmento"). */
+export const segmentSchema = z
+  .object({
+    id: z.string().regex(/^[a-z-]+$/),
+    name: z.string().min(1),
+    description: z.string().min(1),
+    /** Linha da vitrine aberta ao clicar no card. */
+    line: z.enum(showcaseLines),
+    /** Foto em public/images; `null` usa o ícone do segmento. */
+    image: z
+      .object({
+        src: z.string().startsWith("/images/"),
+        /** `object-position` do recorte (ex.: "50% 80%"), ajustado foto a foto. */
+        position: z.string().regex(/^\d{1,3}% \d{1,3}%$/),
+      })
+      .strict()
+      .nullable(),
+  })
+  .strict();
 
 export const productLines = ["Leve", "Pesada", "Leve e pesada"] as const;
 
@@ -149,7 +163,8 @@ export const imageCreditSchema = z.object({
 });
 
 export type Site = z.infer<typeof siteSchema>;
-export type Category = z.infer<typeof categorySchema>;
+export type Segment = z.infer<typeof segmentSchema>;
+export type ShowcaseLine = (typeof showcaseLines)[number];
 export type DemoProduct = z.infer<typeof demoProductSchema>;
 export type Testimonial = z.infer<typeof testimonialSchema>;
 export type ProductLine = (typeof productLines)[number];

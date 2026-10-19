@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { StoreButton } from "@/components/ui/store-button";
 import type { DemoProduct } from "@/content/schema";
 import { cn } from "@/lib/cn";
+import { onShowcaseFilter } from "@/lib/showcase-filter";
 
 const filters = [
   { id: "todas", label: "Todas" },
@@ -22,6 +23,8 @@ function matches(product: DemoProduct, filter: Filter) {
 
 export function ProductGrid({ products }: { products: DemoProduct[] }) {
   const [filter, setFilter] = useState<Filter>("todas");
+  // Os cards de "Navegue por segmento" abrem a vitrine já filtrada.
+  useEffect(() => onShowcaseFilter(setFilter), []);
   const visible = products.filter((product) => matches(product, filter));
 
   return (

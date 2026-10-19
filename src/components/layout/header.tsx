@@ -1,6 +1,8 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { InstagramIcon } from "@/components/ui/brand-icons";
@@ -18,6 +20,9 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  // Marca no menu a página interna aberta (/como-comprar, /sobre).
+  const pathname = usePathname();
+  const current = (href: string) => (href === pathname ? "page" : undefined);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -53,20 +58,21 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:h-18 lg:px-10">
         {/* Assinatura: Padok Peças | MotorDiesel */}
-        <a href="#inicio" aria-label="MotorDiesel — início" className="shrink-0">
+        <Link href="/" aria-label="MotorDiesel — início" className="shrink-0">
           <PadokMotorDieselLogo preload className="w-60 sm:w-80 lg:w-96" />
-        </a>
+        </Link>
 
         <nav aria-label="Principal" className="hidden xl:block">
           <ul className="flex items-center gap-8">
             {navItems.map((item) => (
               <li key={item.href}>
-                <a
+                <Link
                   href={item.href}
-                  className="relative py-2 text-sm font-semibold text-ink/80 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-brand after:transition-transform after:duration-300 hover:text-ink hover:after:scale-x-100"
+                  aria-current={current(item.href)}
+                  className="relative py-2 text-sm font-semibold text-ink/80 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-brand after:transition-transform after:duration-300 hover:text-ink hover:after:scale-x-100 aria-[current=page]:text-ink aria-[current=page]:after:scale-x-100"
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -110,14 +116,15 @@ export function Header() {
           <ul className="divide-y divide-line">
             {navItems.map((item, index) => (
               <li key={item.href}>
-                <a
+                <Link
                   href={item.href}
+                  aria-current={current(item.href)}
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-between py-4 font-display-wide text-2xl font-bold text-ink uppercase italic"
+                  className="flex items-center justify-between py-4 font-display-wide text-2xl font-bold text-ink uppercase italic aria-[current=page]:text-brand"
                 >
                   {item.label}
                   <span className="text-sm font-semibold text-brand not-italic">0{index + 1}</span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

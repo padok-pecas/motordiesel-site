@@ -139,4 +139,31 @@ export const imageCredits = z.array(imageCreditSchema).parse([
     license: "Imagem fornecida pela empresa",
     licenseUrl: null,
   },
+  {
+    // Imagem criada e enviada pela MotorDiesel em 19/10/2026 (card "Caminhonetes e vans").
+    file: "segmento-caminhonetes-vans.webp",
+    author: "MotorDiesel",
+    url: null,
+    source: "Acervo MotorDiesel",
+    license: "Imagem fornecida pela empresa",
+    licenseUrl: null,
+  },
+  {
+    // Imagem criada e enviada pela MotorDiesel em 19/10/2026 (card "Ônibus e micro-ônibus").
+    file: "segmento-onibus.webp",
+    author: "MotorDiesel",
+    url: null,
+    source: "Acervo MotorDiesel",
+    license: "Imagem fornecida pela empresa",
+    licenseUrl: null,
+  },
+  {
+    // Foto da fachada da loja, enviada pela MotorDiesel em 19/10/2026 (faixa "Compre online").
+    file: "fachada-loja.webp",
+    author: "MotorDiesel",
+    url: null,
+    source: "Acervo MotorDiesel",
+    license: "Foto própria — uso autorizado pela empresa",
+    licenseUrl: null,
+  },
 ]);

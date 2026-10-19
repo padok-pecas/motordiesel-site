@@ -1,43 +1,42 @@
 import { z } from "zod";
 
-import { categorySchema, demoProductSchema } from "./schema";
+import { demoProductSchema, segmentSchema } from "./schema";
 
-// Categorias ILUSTRATIVAS para o protótipo — serão revisadas conforme o catálogo real.
-export const categories = z.array(categorySchema).parse([
+// Segmentos atendidos, conforme a descrição comercial da empresa ("peças para automóveis,
+// caminhonetes, vans, caminhões, ônibus e micro-ônibus"). Ainda não há catálogo por segmento:
+// cada card abre a vitrine filtrada pela linha correspondente.
+// Sem foto (`image: null`), o card mostra o ícone do segmento. Ao trocar uma foto, registre o
+// crédito em credits.ts.
+export const segments = z.array(segmentSchema).parse([
   {
-    id: "motor",
-    name: "Motor",
-    description: "Componentes internos, correias, juntas e periféricos.",
-    image: "/images/cat-motor.webp",
-    storeUrl: null,
+    id: "automoveis",
+    name: "Automóveis",
+    description: "Carros de passeio, do uso diário à manutenção preventiva.",
+    line: "leve",
+    // Mesma foto da seção "Linha leve", com outro recorte (o carro inteiro, sem o céu).
+    image: { src: "/images/linha-leve.webp", position: "50% 85%" },
   },
   {
-    id: "filtros",
-    name: "Filtros",
-    description: "Ar, óleo, combustível e cabine.",
-    image: "/images/cat-filtros.webp",
-    storeUrl: null,
+    id: "caminhonetes-vans",
+    name: "Caminhonetes e vans",
+    description: "Picapes e utilitários para trabalho, carga e passageiros.",
+    line: "leve",
+    image: { src: "/images/segmento-caminhonetes-vans.webp", position: "50% 40%" },
   },
   {
-    id: "suspensao",
-    name: "Suspensão",
-    description: "Amortecedores, molas, buchas e articulações.",
-    image: "/images/cat-suspensao.webp",
-    storeUrl: null,
+    id: "caminhoes",
+    name: "Caminhões",
+    description: "Do caminhão leve ao pesado, para quem não pode parar.",
+    line: "pesada",
+    // Mesma foto da seção "Linha pesada", com outro recorte (a carreta em primeiro plano).
+    image: { src: "/images/linha-pesada.webp", position: "35% 72%" },
   },
   {
-    id: "escapamento",
-    name: "Escapamento",
-    description: "Coletores, silenciosos e componentes do sistema.",
-    image: "/images/cat-escapamento.webp",
-    storeUrl: null,
-  },
-  {
-    id: "lubrificantes",
-    name: "Lubrificantes",
-    description: "Óleos e fluidos para manutenção preventiva.",
-    image: "/images/cat-lubrificantes.webp",
-    storeUrl: null,
+    id: "onibus",
+    name: "Ônibus e micro-ônibus",
+    description: "Peças para frotas de transporte de passageiros.",
+    line: "pesada",
+    image: { src: "/images/segmento-onibus.webp", position: "50% 50%" },
   },
 ]);
 
