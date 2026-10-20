@@ -63,7 +63,7 @@ test("categorias: quatro cards que abrem a vitrine já filtrada", async ({ page 
   const products = page.locator("#destaques li article");
 
   await section.getByRole("link", { name: /caminhões na vitrine/i }).click();
-  await expect(page).toHaveURL(/#destaques$/);
+  await expect(page).toHaveURL(/#destaques-pesada$/);
   await expect(page.getByRole("button", { name: "Linha pesada" })).toHaveAttribute(
     "aria-pressed",
     "true",
@@ -110,8 +110,11 @@ test("todas as imagens carregam", async ({ page }) => {
     await page.evaluate((top) => window.scrollTo(0, top), y);
     await page.waitForTimeout(60);
   }
+  // Imagens dentro de blocos ocultos no tamanho de tela atual (ex.: o celular da faixa
+  // "Compre online" no mobile) são carregadas sob demanda e, por isso, nunca baixadas.
   const broken = await page.evaluate(() =>
     [...document.images]
+      .filter((img) => img.checkVisibility())
       .filter((img) => !img.complete || img.naturalWidth === 0)
       .map((img) => img.src),
   );
@@ -229,7 +232,7 @@ test("rodapé: navegação completa e “Contato” leva aos contatos", async ({
     "Linha leve e pesada",
     "Destaques",
     "Como comprar",
-    "Sobre",
+    "Sobre nós",
     "Contato",
   ]) {
     await expect(footerNav.getByRole("link", { name: label, exact: true })).toBeVisible();
@@ -240,12 +243,34 @@ test("rodapé: navegação completa e “Contato” leva aos contatos", async ({
 });
 
 test("final da página não exibe dados não confirmados", async ({ page }) => {
-  // Só o Instagram foi informado: nenhuma outra rede nem página de privacidade.
-  await expect(
-    page.locator("a[href*='facebook.com'], a[href*='tiktok.com'], a[href*='youtube.com']"),
-  ).toHaveCount(0);
+  // Só Instagram e Facebook foram informados: nenhuma outra rede nem página de privacidade.
+  await expect(page.locator("a[href*='tiktok.com'], a[href*='youtube.com']")).toHaveCount(0);
+  for (const link of await page.locator("a[href*='facebook.com']").all()) {
+    await expect(link).toHaveAttribute("href", "https://www.facebook.com/motordieselautopecas");
+  }
   await expect(page.getByRole("link", { name: /privacidade/i })).toHaveCount(0);
   await expect(page.locator("body")).not.toContainText(/loja oficial/i);
+});
+
+test("faixa Compre online: celular com o perfil e links das redes sociais", async ({ page }) => {
+  const band = page.locator("#loja");
+  await expect(
+    band.getByRole("heading", { name: /Fique por dentro da MotorDiesel/i }),
+  ).toBeVisible();
+  const expected = {
+    Instagram: "https://www.instagram.com/motordieselauto",
+    Facebook: "https://www.facebook.com/motordieselautopecas",
+  };
+  for (const [label, href] of Object.entries(expected)) {
+    const link = band.getByRole("link", { name: new RegExp(`^${label} da MotorDiesel`) });
+    await expect(link).toBeVisible();
+    await expect(link).toHaveAttribute("href", href);
+    await expect(link).toHaveAttribute("target", "_blank");
+    await expect(link).toHaveAttribute("rel", /noopener/);
+  }
+  // A lista antiga de vantagens saiu; o botão da loja continua.
+  await expect(band.getByText("Acompanhe o pedido pela plataforma")).toHaveCount(0);
+  await expect(band.locator('[data-channel="store"]')).toBeVisible();
 });
 
 test("Instagram oficial no rodapé (e no cabeçalho ou no menu mobile)", async ({

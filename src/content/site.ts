@@ -52,7 +52,8 @@ export const site = siteSchema.parse({
   social: {
     // Perfil oficial confirmado em 14/10/2026.
     instagram: "https://www.instagram.com/motordieselauto",
-    facebook: null,
+    // Página oficial informada pela empresa em 20/10/2026.
+    facebook: "https://www.facebook.com/motordieselautopecas",
     tiktok: null,
     youtube: null,
   },

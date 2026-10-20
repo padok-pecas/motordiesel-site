@@ -66,14 +66,11 @@ describe("redes sociais", () => {
   const withSocial = (social: Partial<typeof site.social>) =>
     siteSchema.safeParse({ ...site, social: { ...site.social, ...social } }).success;
 
-  it("usa o perfil oficial do Instagram e nenhuma rede não informada", () => {
+  it("usa os perfis oficiais do Instagram e do Facebook e nenhuma rede não informada", () => {
     expect(site.social.instagram).toBe("https://www.instagram.com/motordieselauto");
+    expect(site.social.facebook).toBe("https://www.facebook.com/motordieselautopecas");
     if (!site.isPrototype) return;
-    expect([site.social.facebook, site.social.tiktok, site.social.youtube]).toEqual([
-      null,
-      null,
-      null,
-    ]);
+    expect([site.social.tiktok, site.social.youtube]).toEqual([null, null]);
   });
 
   it("valida o domínio de cada rede", () => {

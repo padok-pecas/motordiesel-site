@@ -158,7 +158,7 @@ export const imageCredits = z.array(imageCreditSchema).parse([
     licenseUrl: null,
   },
   {
-    // Foto da fachada da loja, enviada pela MotorDiesel em 19/10/2026 (faixa "Compre online").
+    // Foto da fachada da loja, enviada pela MotorDiesel em 20/10/2026 (faixa "Compre online").
     file: "fachada-loja.webp",
     author: "MotorDiesel",
     url: null,

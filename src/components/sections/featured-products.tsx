@@ -4,12 +4,22 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { StoreButton } from "@/components/ui/store-button";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { demoProducts } from "@/content/catalog";
+import { showcaseLines } from "@/content/schema";
+import { showcaseAnchor } from "@/lib/showcase-filter";
 
 import { ProductGrid } from "./product-grid";
 
 export function FeaturedProducts() {
   return (
-    <section id="destaques" aria-labelledby="destaques-title" className="bg-mist section-y">
+    <section
+      id="destaques"
+      aria-labelledby="destaques-title"
+      className="relative bg-mist section-y"
+    >
+      {/* Destinos dos cards de categoria: a vitrine já filtrada pela linha */}
+      {showcaseLines.map((line) => (
+        <span key={line} id={showcaseAnchor(line)} className="absolute top-0" aria-hidden />
+      ))}
       <Container>
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <SectionHeading
