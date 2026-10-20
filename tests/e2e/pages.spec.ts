@@ -69,12 +69,9 @@ test("menu superior abre as páginas e marca a atual", async ({ page, isMobile }
     "page",
   );
 
-  await nav.getByRole("link", { name: "Sobre nós" }).click();
+  await nav.getByRole("link", { name: "Sobre" }).click();
   await expect(page).toHaveURL(/\/sobre$/);
-  await expect(nav.getByRole("link", { name: "Sobre nós" })).toHaveAttribute(
-    "aria-current",
-    "page",
-  );
+  await expect(nav.getByRole("link", { name: "Sobre" })).toHaveAttribute("aria-current", "page");
 
   // De uma página interna, as seções da home continuam acessíveis.
   await nav.getByRole("link", { name: "Vitrine" }).click();
@@ -91,7 +88,7 @@ test("menu mobile abre a página “Sobre” a partir de outra página", async (
     "aria-current",
     "page",
   );
-  await menu.getByRole("link", { name: "Sobre nós" }).click();
+  await menu.getByRole("link", { name: "Sobre" }).click();
   await expect(page).toHaveURL(/\/sobre$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText(/Sobre a MotorDiesel/i);
   await expect(page.locator("#menu-mobile")).toBeHidden();

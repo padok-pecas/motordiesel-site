@@ -232,7 +232,7 @@ test("rodapé: navegação completa e “Contato” leva aos contatos", async ({
     "Linha leve e pesada",
     "Destaques",
     "Como comprar",
-    "Sobre nós",
+    "Sobre",
     "Contato",
   ]) {
     await expect(footerNav.getByRole("link", { name: label, exact: true })).toBeVisible();

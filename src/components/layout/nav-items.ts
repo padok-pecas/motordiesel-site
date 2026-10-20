@@ -4,7 +4,7 @@ export const navItems = [
   { href: "/#linhas", label: "Leve e Pesada" },
   { href: "/#destaques", label: "Vitrine" },
   { href: "/como-comprar", label: "Como comprar" },
-  { href: "/sobre", label: "Sobre nós" },
+  { href: "/sobre", label: "Sobre" },
 ] as const;
 
 /**
@@ -17,6 +17,6 @@ export const footerNavItems = [
   { href: "/#linhas", label: "Linha leve e pesada" },
   { href: "/#destaques", label: "Destaques" },
   { href: "/como-comprar", label: "Como comprar" },
-  { href: "/sobre", label: "Sobre nós" },
+  { href: "/sobre", label: "Sobre" },
   { href: "#contato", label: "Contato" },
 ] as const;
