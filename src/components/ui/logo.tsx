@@ -47,7 +47,9 @@ export function MotorDieselLogo({ className }: Props) {
 
 // Assinatura combinada Padok Peças | MotorDiesel, já proporcionada (fundo transparente,
 // margens recortadas). O slogan é cinza-escuro: usar sobre fundos claros.
-const ASSINATURA = { src: "/brand/padok-motordiesel.png", width: 2944, height: 384 };
+// WebP com 768px (o dobro da maior largura exibida, 384px); o PNG original (2944px) fica em
+// public/brand como matriz.
+const ASSINATURA = { src: "/brand/padok-motordiesel.webp", width: 768, height: 100 };
 
 /** Assinatura Padok Peças | MotorDiesel — para o cabeçalho (fundo claro). */
 export function PadokMotorDieselLogo({ className, preload }: Props) {
@@ -61,12 +63,13 @@ export function PadokMotorDieselLogo({ className, preload }: Props) {
   );
 }
 
-// Assinatura empilhada Padok Peças / MotorDiesel (fundo transparente, reduzida para 1200px).
+// Assinatura empilhada Padok Peças / MotorDiesel (fundo transparente). WebP com 640px (o dobro
+// da maior largura exibida, 240px, com folga); o PNG de 1200px fica em public/brand como matriz.
 // O slogan foi clareado para #ECF3FF: usar somente sobre fundos escuros.
 const ASSINATURA_VERTICAL = {
-  src: "/brand/padok-motordiesel-vertical.png",
-  width: 1200,
-  height: 670,
+  src: "/brand/padok-motordiesel-vertical.webp",
+  width: 640,
+  height: 357,
 };
 
 /** Assinatura empilhada Padok Peças / MotorDiesel — para o rodapé (fundo escuro). */

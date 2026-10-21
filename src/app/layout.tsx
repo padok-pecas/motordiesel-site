@@ -5,9 +5,11 @@ import { site } from "@/content/site";
 
 import "./globals.css";
 
+// Saira só é usada nos títulos (`font-display-wide`), sempre em itálico: carregar também o
+// estilo normal pré-carregava ~99 KB sem uso.
 const saira = Saira({
   subsets: ["latin"],
-  style: ["normal", "italic"],
+  style: ["italic"],
   axes: ["wdth"],
   variable: "--font-saira",
   display: "swap",

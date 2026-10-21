@@ -33,7 +33,7 @@ export function Lines() {
     <section id="linhas" aria-labelledby="linhas-title" className="bg-ink text-white">
       <Container className="flex flex-col gap-4 pt-12 pb-8 md:flex-row md:items-end md:justify-between lg:pt-16">
         <div>
-          <p className="flex items-center gap-3 text-xs font-semibold tracking-[0.22em] text-brand uppercase">
+          <p className="flex items-center gap-3 text-xs font-semibold tracking-[0.22em] text-brand-on-dark uppercase">
             Do leve ao pesado
           </p>
           <h2

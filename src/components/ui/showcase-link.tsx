@@ -1,6 +1,6 @@
 "use client";
 
-import type { ShowcaseLine } from "@/content/schema";
+import type { ShowcaseLine } from "@/content/showcase";
 import { requestShowcaseFilter, showcaseAnchor } from "@/lib/showcase-filter";
 
 /** Âncora para a vitrine que já aplica o filtro de linha (pelo endereço e pelo clique). */

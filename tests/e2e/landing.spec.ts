@@ -172,7 +172,7 @@ test("hero: vídeo de fundo mudo, em loop e decorativo", async ({ page, request 
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 });
 
-test("hero: com movimento reduzido, o vídeo não é carregado", async ({ browser }) => {
+test("hero: com movimento reduzido, o vídeo não é carregado e fica a capa", async ({ browser }) => {
   const context = await browser.newContext({ reducedMotion: "reduce" });
   const page = await context.newPage();
   const requested: string[] = [];
@@ -181,8 +181,20 @@ test("hero: com movimento reduzido, o vídeo não é carregado", async ({ browse
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await page.waitForLoadState("networkidle");
   await expect(page.locator("#inicio video")).toHaveCount(0);
-  expect(requested.some((url) => url.includes("/videos/"))).toBe(false);
+  expect(requested.some((url) => url.endsWith(".mp4"))).toBe(false);
+  // A capa (primeiro quadro do vídeo) aparece no lugar, já carregada.
+  const poster = page.locator('#inicio img[src*="motor-diesel-hero-poster"]');
+  await expect(poster).toBeVisible();
+  expect(
+    await poster.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0),
+  ).toBe(true);
   await context.close();
+});
+
+test("hero: a capa do vídeo vem no HTML, com prioridade alta", async ({ page }) => {
+  const poster = page.locator('#inicio img[src*="motor-diesel-hero-poster"]');
+  await expect(poster).toHaveAttribute("fetchpriority", "high");
+  await expect(poster).toHaveAttribute("srcset", /640w.*1280w/);
 });
 
 test("menu mobile abre, navega e fecha com Escape", async ({ page, isMobile }) => {

@@ -19,7 +19,8 @@ export function SectionHeading({
     <div className={cn("max-w-2xl", align === "center" && "mx-auto text-center")}>
       <p
         className={cn(
-          "flex items-center gap-3 text-xs font-semibold tracking-[0.22em] text-brand uppercase",
+          "flex items-center gap-3 text-xs font-semibold tracking-[0.22em] uppercase",
+          tone === "dark" ? "text-brand-on-dark" : "text-brand",
           align === "center" && "justify-center",
         )}
       >

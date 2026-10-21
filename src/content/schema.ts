@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { showcaseLines } from "./showcase";
+
 // Só aceita endereços oficiais do Mercado Livre Brasil (https). `null` = ainda não configurado.
 const mercadoLivreUrl = z.url({ protocol: /^https$/ }).refine((value) => {
   const host = new URL(value).hostname;
@@ -112,8 +114,8 @@ export const siteSchema = z.object({
   reviews: reviewsSchema,
 });
 
-/** Linhas da vitrine (os mesmos filtros de "Linha leve" e "Linha pesada"). */
-export const showcaseLines = ["leve", "pesada"] as const;
+// Linhas da vitrine: definidas num módulo sem zod, que o navegador pode importar.
+export { showcaseLines, type ShowcaseLine } from "./showcase";
 
 /** Segmento de veículos atendido pela loja (seção "Navegue por segmento"). */
 export const segmentSchema = z
@@ -164,7 +166,6 @@ export const imageCreditSchema = z.object({
 
 export type Site = z.infer<typeof siteSchema>;
 export type Segment = z.infer<typeof segmentSchema>;
-export type ShowcaseLine = (typeof showcaseLines)[number];
 export type DemoProduct = z.infer<typeof demoProductSchema>;
 export type Testimonial = z.infer<typeof testimonialSchema>;
 export type ProductLine = (typeof productLines)[number];

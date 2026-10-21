@@ -9,6 +9,9 @@
   --brand-red: #db1d21;
   --brand-red-strong: color-mix(in oklab, var(--brand-red) 82%, black);
   --brand-red-soft: color-mix(in oklab, var(--brand-red) 8%, white);
+  /* Vermelho para texto pequeno sobre fundos escuros: contraste ≥ 4,5:1 sobre ink e graphite
+     (o #DB1D21 fica em 3,7:1 e 3,3:1). */
+  --brand-red-on-dark: #f3474c;
   --brand-ice: #ecf3ff;
 
   --graphite: #1d2024;
@@ -24,6 +27,7 @@
   --color-brand: var(--brand-red);
   --color-brand-strong: var(--brand-red-strong);
   --color-brand-soft: var(--brand-red-soft);
+  --color-brand-on-dark: var(--brand-red-on-dark);
   --color-ice: var(--brand-ice);
   --color-graphite: var(--graphite);
   --color-graphite-soft: var(--graphite-soft);

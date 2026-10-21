@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-import { StoreButton } from "@/components/ui/store-button";
 import type { DemoProduct } from "@/content/schema";
 import { cn } from "@/lib/cn";
 import { onShowcaseFilter } from "@/lib/showcase-filter";
@@ -21,7 +20,17 @@ function matches(product: DemoProduct, filter: Filter) {
   return product.line.toLowerCase() === filter;
 }
 
-export function ProductGrid({ products }: { products: DemoProduct[] }) {
+/**
+ * Vitrine com filtro por linha. O botão "Ver na loja" chega pronto do servidor (`buyButton`),
+ * para que a configuração do site e o zod não entrem no JavaScript do navegador.
+ */
+export function ProductGrid({
+  products,
+  buyButton,
+}: {
+  products: DemoProduct[];
+  buyButton: React.ReactNode;
+}) {
   const [filter, setFilter] = useState<Filter>("todas");
   // Os cards de "Navegue por segmento" abrem a vitrine já filtrada.
   useEffect(() => onShowcaseFilter(setFilter), []);
@@ -70,20 +79,7 @@ export function ProductGrid({ products }: { products: DemoProduct[] }) {
                   {product.name}
                 </h3>
                 <p className="mt-1 text-xs text-steel">Imagem ilustrativa</p>
-                <div className="mt-auto pt-4">
-                  <StoreButton
-                    label={
-                      <>
-                        <span className="lg:hidden">Ver na loja</span>
-                        <span className="hidden lg:inline">Ver no Mercado Livre</span>
-                      </>
-                    }
-                    variant="subtle"
-                    size="sm"
-                    fullWidth
-                    className="px-2 text-[0.7rem] sm:text-[0.8rem]"
-                  />
-                </div>
+                <div className="mt-auto pt-4">{buyButton}</div>
               </div>
             </article>
           </li>

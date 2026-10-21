@@ -14,12 +14,25 @@ export function Hero() {
       // Ocupa a primeira dobra (descontando o cabeçalho fixo: h-16 / lg:h-18).
       className="relative isolate flex min-h-[calc(100svh-4rem)] items-center overflow-hidden bg-ink text-white lg:min-h-[calc(100svh-4.5rem)]"
     >
-      {/* Vídeo de fundo. Sem vídeo (movimento reduzido, economia de dados, falha ou
-          autoplay bloqueado), fica o fundo grafite com o brilho vermelho abaixo. */}
-      {/* O arquivo (1280×720) traz faixas pretas de 40px em cima e embaixo. A caixa do vídeo
-          é 12,5% mais alta (720/640) e centralizada: o `object-cover` passa a cobrir a área
-          só com a imagem útil (1280×640) e as faixas ficam sempre fora da tela. */}
+      {/* Vídeo de fundo sobre a capa (o primeiro quadro do vídeo, já no HTML): a capa aparece
+          de imediato e o vídeo surge por cima quando começa a tocar, no mesmo enquadramento.
+          Sem vídeo (movimento reduzido, economia de dados, falha ou autoplay bloqueado), a capa
+          fica como imagem estática. */}
+      {/* O arquivo (1280×720) traz faixas pretas de 40px em cima e embaixo. A caixa da capa e do
+          vídeo é 12,5% mais alta (720/640) e centralizada: o `object-cover` cobre a área só com
+          a imagem útil (1280×640) e as faixas ficam sempre fora da tela. */}
       <div className="absolute inset-0 -z-20 overflow-hidden" aria-hidden>
+        {/* eslint-disable-next-line @next/next/no-img-element -- site estático sem otimização de imagem; o srcSet é montado à mão */}
+        <img
+          src="/videos/motor-diesel-hero-poster-1280.webp"
+          srcSet="/videos/motor-diesel-hero-poster-640.webp 640w, /videos/motor-diesel-hero-poster-1280.webp 1280w"
+          sizes="100vw"
+          alt=""
+          width={1280}
+          height={720}
+          fetchPriority="high"
+          className="absolute inset-x-0 top-[-6.25%] h-[112.5%] w-full object-cover object-center"
+        />
         <BackgroundVideo
           src="/videos/motor-diesel-hero.mp4"
           className="absolute inset-x-0 top-[-6.25%] h-[112.5%] w-full object-center"
@@ -59,8 +72,9 @@ export function Hero() {
         </p>
 
         <div className="animate-rise mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 [animation-delay:240ms]">
-          <StoreButton />
-          <WhatsAppButton />
+          {/* Abaixo de 360px o botão da loja não cabia inteiro (344px numa área de 288px). */}
+          <StoreButton className="max-[359px]:px-4 max-[359px]:text-[0.8rem]" />
+          <WhatsAppButton className="max-[359px]:px-4 max-[359px]:text-[0.8rem]" />
         </div>
         <a
           href="#categorias"

@@ -47,7 +47,23 @@ export function FeaturedProducts() {
           <span className="text-ink">Motor</span>
         </div>
 
-        <ProductGrid products={demoProducts} />
+        <ProductGrid
+          products={demoProducts}
+          buyButton={
+            <StoreButton
+              label={
+                <>
+                  <span className="lg:hidden">Ver na loja</span>
+                  <span className="hidden lg:inline">Ver no Mercado Livre</span>
+                </>
+              }
+              variant="subtle"
+              size="sm"
+              fullWidth
+              className="px-2 text-[0.7rem] sm:text-[0.8rem]"
+            />
+          }
+        />
 
         {/* Faixa comercial: os dois canais lado a lado, sem repetir botões gigantes */}
         <div className="mt-10 flex flex-col gap-5 bg-white p-5 ring-1 ring-line sm:p-6 lg:flex-row lg:items-center lg:justify-between">

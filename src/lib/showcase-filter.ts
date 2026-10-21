@@ -1,4 +1,4 @@
-import { showcaseLines, type ShowcaseLine } from "@/content/schema";
+import { showcaseLines, type ShowcaseLine } from "@/content/showcase";
 
 // Canal entre os links de outras seções e o filtro da vitrine (#destaques), que é estado de
 // cliente. A linha vai no próprio endereço ("#destaques-leve"): sem JavaScript o link só rola
