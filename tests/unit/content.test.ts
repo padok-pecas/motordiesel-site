@@ -17,7 +17,7 @@ describe("site", () => {
   });
 
   it("canais configurados estão em formato válido", () => {
-    expect(site.mercadoLivre.storeUrl).toMatch(/^https:\/\/www\.mercadolivre\.com\.br\//);
+    expect(site.mercadoLivre.storeUrl).toMatch(/^https:\/\/(www|lista)\.mercadolivre\.com\.br\//);
     if (site.contact.whatsapp) expect(site.contact.whatsapp).toMatch(/^55\d{10,11}$/);
     if (site.contact.phone) expect(site.contact.phone.replace(/\D/g, "")).toMatch(/^\d{10,11}$/);
   });

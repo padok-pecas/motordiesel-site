@@ -30,10 +30,10 @@ export const site = siteSchema.parse({
     "A MotorDiesel constituída em dezembro de 1995 a partir do espírito visionário e empreendedor de Roberval Lira. Com 31 anos de expertise, somos referência no segmento de peças para automóveis, caminhonetes, vans, caminhões, ônibus e micro-ônibus. Em 2025 nasceu a Padok, uma marca única, mais curta, mais memorável, mais forte visualmente, mais moderna e mais expansível. Com intuito de atender tanto o atacado, varejo, linha leve, linha pesada, peças elétricas e peças mecânicas.",
 
   mercadoLivre: {
-    // Link provisório informado pela empresa em 17/10/2026 (anúncio no Mercado Livre).
-    // Trocar pelo endereço da loja/perfil quando estiver disponível.
+    // Lista de produtos do vendedor MotorDiesel no Mercado Livre, informada pela empresa em
+    // 21/10/2026.
     storeUrl:
-      "https://www.mercadolivre.com.br/conjunto-controlador-ecu--eaton--5574963/up/MLBU5566122180?pdp_filters=item_id:MLB5406624413",
+      "https://lista.mercadolivre.com.br/_CustId_3717650448?item_id=MLB5406624413&category_id=MLB191833&seller_id=3717650448&client=recoview-selleritems&recos_listing=true#origin=upp&component=sellerData&typeSeller=classic",
   },
 
   // Texto inicial da conversa. Só é usado quando `contact.whatsapp` estiver preenchido.
