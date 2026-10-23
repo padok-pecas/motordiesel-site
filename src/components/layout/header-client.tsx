@@ -10,7 +10,8 @@ import { BrandStripe } from "@/components/ui/brand-stripe";
 import { PadokMotorDieselLogo } from "@/components/ui/logo";
 import { cn } from "@/lib/cn";
 
-import { navItems } from "./nav-items";
+import { NavDropdown } from "./nav-dropdown";
+import { isNavGroup, navItems } from "./nav-items";
 
 /**
  * Parte interativa do cabeçalho (menu mobile, sombra ao rolar, item atual). Recebe os dados e
@@ -31,7 +32,7 @@ export function HeaderClient({
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
-  // Marca no menu a página interna aberta (/como-comprar, /sobre).
+  // Marca no menu a página interna aberta (/como-comprar, /sobre...).
   const pathname = usePathname();
   const current = (href: string) => (href === pathname ? "page" : undefined);
 
@@ -75,17 +76,21 @@ export function HeaderClient({
 
         <nav aria-label="Principal" className="hidden xl:block">
           <ul className="flex items-center gap-8">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  aria-current={current(item.href)}
-                  className="relative py-2 text-sm font-semibold text-ink/80 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-brand after:transition-transform after:duration-300 hover:text-ink hover:after:scale-x-100 aria-[current=page]:text-ink aria-[current=page]:after:scale-x-100"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {navItems.map((item) =>
+              isNavGroup(item) ? (
+                <NavDropdown key={item.label} group={item} pathname={pathname} />
+              ) : (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={current(item.href)}
+                    className="relative py-2 text-sm font-semibold text-ink/80 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-brand after:transition-transform after:duration-300 hover:text-ink hover:after:scale-x-100 aria-[current=page]:text-ink aria-[current=page]:after:scale-x-100"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ),
+            )}
           </ul>
         </nav>
 
@@ -127,19 +132,41 @@ export function HeaderClient({
       >
         <nav aria-label="Menu mobile" className="px-4 pt-4 pb-10 sm:px-6">
           <ul className="divide-y divide-line">
-            {navItems.map((item, index) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  aria-current={current(item.href)}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center justify-between py-4 font-display-wide text-2xl font-bold text-ink uppercase italic aria-[current=page]:text-brand"
-                >
-                  {item.label}
-                  <span className="text-sm font-semibold text-brand not-italic">0{index + 1}</span>
-                </Link>
-              </li>
-            ))}
+            {/* No celular os grupos aparecem abertos (título + links), sem submenu escondido. */}
+            {navItems.map((item) =>
+              isNavGroup(item) ? (
+                <li key={item.label} className="py-3">
+                  <p className="text-xs font-semibold tracking-[0.2em] text-steel uppercase">
+                    {item.label}
+                  </p>
+                  <ul className="mt-1">
+                    {item.items.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          aria-current={current(child.href)}
+                          onClick={() => setOpen(false)}
+                          className="flex min-h-11 items-center border-l-2 border-line pl-4 font-display-wide text-xl font-bold text-ink uppercase italic aria-[current=page]:border-brand aria-[current=page]:text-brand"
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ) : (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={current(item.href)}
+                    onClick={() => setOpen(false)}
+                    className="flex items-center py-4 font-display-wide text-2xl font-bold text-ink uppercase italic aria-[current=page]:text-brand"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ),
+            )}
           </ul>
           <div className="mt-8 grid gap-3">{mobileCtas}</div>
           {instagramUrl && (

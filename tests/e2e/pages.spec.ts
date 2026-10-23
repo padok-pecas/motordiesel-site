@@ -31,8 +31,8 @@ test("/como-comprar: passo a passo, canais e metadados", async ({ page }) => {
 
 test("/sobre: conteúdo institucional, foto e contatos", async ({ page }) => {
   await page.goto("/sobre");
-  await expect(page).toHaveTitle(/Sobre \| MotorDiesel/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Sobre a MotorDiesel/i);
+  await expect(page).toHaveTitle(/Sobre nós \| MotorDiesel/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Sobre nós/i);
   await expect(
     page.getByRole("heading", { name: /Confiança de quem vive o motor/i }),
   ).toBeVisible();
@@ -79,33 +79,74 @@ test("páginas internas: trilha de navegação volta ao início", async ({ page 
   }
 });
 
-test("menu superior abre as páginas e marca a atual", async ({ page, isMobile }) => {
+test("menu superior: Home, menus suspensos e item atual", async ({ page, isMobile }) => {
   test.skip(isMobile, "menu de desktop");
   const nav = page.getByRole("navigation", { name: "Principal" });
+  const open = async (label: string) => {
+    const button = nav.getByRole("button", { name: label });
+    await button.click();
+    await expect(button).toHaveAttribute("aria-expanded", "true");
+  };
 
-  await page.goto("/");
-  await nav.getByRole("link", { name: "Como comprar" }).click();
-  await expect(page).toHaveURL(/\/como-comprar$/);
-  await expect(nav.getByRole("link", { name: "Como comprar" })).toHaveAttribute(
+  await page.goto("/sobre");
+  // Institucional: exatamente as três opções.
+  await open("Institucional");
+  const institutional = nav
+    .locator("li", { has: page.getByRole("button", { name: "Institucional" }) })
+    .getByRole("link");
+  await expect(institutional).toHaveText(["Sobre nós", "Missão, Visão e Valores", "Nossa marca"]);
+  await expect(nav.getByRole("link", { name: "Sobre nós" })).toHaveAttribute(
     "aria-current",
     "page",
   );
+  // Esc fecha e devolve o foco ao botão.
+  await page.keyboard.press("Escape");
+  await expect(nav.getByRole("button", { name: "Institucional" })).toHaveAttribute(
+    "aria-expanded",
+    "false",
+  );
+  await expect(nav.getByRole("button", { name: "Institucional" })).toBeFocused();
 
+  await open("Institucional");
+  await nav.getByRole("link", { name: "Missão, Visão e Valores" }).click();
+  await expect(page).toHaveURL(/\/missao-visao-valores$/);
+  await open("Institucional");
+  await nav.getByRole("link", { name: "Nossa marca" }).click();
+  await expect(page).toHaveURL(/\/nossa-marca$/);
+
+  // Produtos: Categorias, Vitrine e Leve e Pesada.
+  await open("Produtos");
+  await expect(
+    nav.locator("li", { has: page.getByRole("button", { name: "Produtos" }) }).getByRole("link"),
+  ).toHaveText(["Categorias", "Vitrine", "Leve e Pesada"]);
   await nav.getByRole("link", { name: "Leve e Pesada" }).click();
   await expect(page).toHaveURL(/\/leve-e-pesada$/);
-  await expect(nav.getByRole("link", { name: "Leve e Pesada" })).toHaveAttribute(
-    "aria-current",
-    "page",
-  );
-
-  await nav.getByRole("link", { name: "Sobre" }).click();
-  await expect(page).toHaveURL(/\/sobre$/);
-  await expect(nav.getByRole("link", { name: "Sobre" })).toHaveAttribute("aria-current", "page");
-
-  // De uma página interna, as seções da home continuam acessíveis.
+  await open("Produtos");
   await nav.getByRole("link", { name: "Vitrine" }).click();
   await expect(page).toHaveURL(/\/#destaques$/);
   await expect(page.locator("#destaques")).toBeInViewport();
+
+  // Como comprar segue como link direto; Home volta ao topo, na Hero com o vídeo.
+  await nav.getByRole("link", { name: "Como comprar" }).click();
+  await expect(page).toHaveURL(/\/como-comprar$/);
+  await nav.getByRole("link", { name: "Home" }).click();
+  await expect(page).toHaveURL(/\/#inicio$/);
+  await expect(page.locator("#inicio")).toBeInViewport();
+  expect(await page.evaluate(() => window.scrollY)).toBeLessThan(10);
+});
+
+test("menu suspenso funciona pelo teclado", async ({ page, isMobile }) => {
+  test.skip(isMobile, "menu de desktop");
+  await page.goto("/");
+  const nav = page.getByRole("navigation", { name: "Principal" });
+  const button = nav.getByRole("button", { name: "Institucional" });
+  await button.focus();
+  await page.keyboard.press("Enter");
+  await expect(button).toHaveAttribute("aria-expanded", "true");
+  await page.keyboard.press("Tab");
+  await expect(nav.getByRole("link", { name: "Sobre nós" })).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/\/sobre$/);
 });
 
 test("menu mobile abre a página “Sobre” a partir de outra página", async ({ page, isMobile }) => {
@@ -117,10 +158,66 @@ test("menu mobile abre a página “Sobre” a partir de outra página", async (
     "aria-current",
     "page",
   );
-  await menu.getByRole("link", { name: "Sobre" }).click();
+  for (const label of [
+    "Home",
+    "Categorias",
+    "Vitrine",
+    "Leve e Pesada",
+    "Sobre nós",
+    "Missão, Visão e Valores",
+    "Nossa marca",
+  ]) {
+    await expect(menu.getByRole("link", { name: label, exact: true })).toBeVisible();
+  }
+  await menu.getByRole("link", { name: "Sobre nós" }).click();
   await expect(page).toHaveURL(/\/sobre$/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Sobre a MotorDiesel/i);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Sobre nós/i);
   await expect(page.locator("#menu-mobile")).toBeHidden();
+});
+
+test("/missao-visao-valores: missão, visão e os cinco valores", async ({ page }) => {
+  await page.goto("/missao-visao-valores");
+  await expect(page).toHaveTitle(/Missão, Visão e Valores \| MotorDiesel/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Missão, Visão e Valores/i);
+  for (const name of ["Nossa missão", "Nossa visão", "Nossos valores"]) {
+    await expect(page.getByRole("heading", { level: 2, name })).toBeVisible();
+  }
+  await expect(page.getByText(/impulsionar a mobilidade/)).toBeVisible();
+  await expect(page.getByText(/regiões Norte e Nordeste/)).toBeVisible();
+  await expect(page.locator("section[aria-labelledby='valores-title'] li")).toHaveText([
+    "Integridade em cada situação.",
+    "Proximidade que gera valor.",
+    "Crescimento com responsabilidade.",
+    "Excelência operacional.",
+    "Valorização das pessoas.",
+  ]);
+});
+
+test("/nossa-marca: texto da marca e manual (botões só com o PDF publicado)", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/nossa-marca");
+  await expect(page).toHaveTitle(/Nossa marca \| MotorDiesel/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Nossa marca/i);
+  await expect(page.getByText("Padok Peças: uma marca, uma identidade.")).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 2, name: "Manual da Marca Padok Peças" }),
+  ).toBeVisible();
+
+  const pdf = await request.get("/documentos/manual-da-marca-padok-pecas.pdf");
+  const view = page.locator('[data-manual="view"]');
+  const download = page.locator('[data-manual="download"]');
+  if (pdf.ok()) {
+    await expect(view).toHaveAttribute("href", "/documentos/manual-da-marca-padok-pecas.pdf");
+    await expect(view).toHaveAttribute("target", "_blank");
+    await expect(download).toHaveAttribute("download", "manual-da-marca-padok-pecas.pdf");
+  } else {
+    // Sem o arquivo, nenhum botão simulado.
+    await expect(view).toHaveCount(0);
+    await expect(download).toHaveCount(0);
+    await expect(page.getByText(/disponível para consulta e download em breve/)).toBeVisible();
+  }
 });
 
 test("rodapé das páginas internas leva às seções da home e às páginas", async ({ page }) => {

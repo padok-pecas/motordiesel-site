@@ -8,19 +8,19 @@ import { site } from "@/content/site";
 const description = `Conheça a ${site.name}, autopeças do leve ao pesado em ${site.city} – ${site.state}.`;
 
 export const metadata: Metadata = {
-  title: `Sobre | ${site.name}`,
+  title: `Sobre nós | ${site.name}`,
   description,
-  openGraph: { title: `Sobre a ${site.name}`, description },
+  openGraph: { title: `Sobre nós | ${site.name}`, description },
 };
 
 export default function AboutPage() {
   return (
     <SiteShell>
       <PageHeader
-        crumb="Sobre"
+        crumb="Sobre nós"
         title={
           <>
-            Sobre a <span className="text-brand">{site.name}</span>
+            Sobre <span className="text-brand">nós</span>
           </>
         }
         description={`${site.slogan}. Autopeças em ${site.city} – ${site.state}.`}
