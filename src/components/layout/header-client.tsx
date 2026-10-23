@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { InstagramIcon } from "@/components/ui/brand-icons";
+import { BrandStripe } from "@/components/ui/brand-stripe";
 import { PadokMotorDieselLogo } from "@/components/ui/logo";
 import { cn } from "@/lib/cn";
 
@@ -116,6 +117,8 @@ export function HeaderClient({
           {open ? <X className="size-6" aria-hidden /> : <Menu className="size-6" aria-hidden />}
         </button>
       </div>
+      {/* Faixa tricolor da marca na base do cabeçalho */}
+      <BrandStripe className="absolute inset-x-0 -bottom-px h-1.5" />
 
       <div
         id="menu-mobile"

@@ -8,6 +8,7 @@ import {
   WhatsAppIcon,
   YouTubeIcon,
 } from "@/components/ui/brand-icons";
+import { BrandStripe } from "@/components/ui/brand-stripe";
 import { Container } from "@/components/ui/container";
 import { PadokMotorDieselStackedLogo } from "@/components/ui/logo";
 import { StoreButton } from "@/components/ui/store-button";
@@ -103,8 +104,8 @@ export function Footer() {
   const hasFloat = getWhatsappUrl() !== null;
 
   return (
-    <footer className="relative bg-ink text-white/70">
-      <span className="absolute inset-x-0 top-0 h-1 bg-brand" aria-hidden />
+    <footer className="relative bg-royal text-white/75">
+      <BrandStripe className="absolute inset-x-0 top-0 h-1.5" />
 
       <Container className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.9fr_1.1fr_1fr] lg:gap-8 lg:py-14">
         <div>
@@ -132,7 +133,7 @@ export function Footer() {
           <ul className="mt-4 grid gap-3 text-sm">
             {!site.contact.address && (
               <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
+                <MapPin className="mt-0.5 size-4 shrink-0 text-stripe-yellow" aria-hidden />
                 <span>
                   {site.city} – {site.state}
                 </span>
@@ -140,7 +141,7 @@ export function Footer() {
             )}
             {lines.map(({ icon: Icon, label, value, href }) => (
               <li key={label} className="flex items-start gap-3">
-                <Icon className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
+                <Icon className="mt-0.5 size-4 shrink-0 text-stripe-yellow" aria-hidden />
                 <span>
                   <span className="sr-only">{label}: </span>
                   {href ? (
@@ -155,7 +156,7 @@ export function Footer() {
             ))}
           </ul>
           {pending.length > 0 && (
-            <p className="mt-3 text-xs leading-relaxed text-white/50">
+            <p className="mt-3 text-xs leading-relaxed text-white/65">
               {pendingText(pending)} em configuração.
             </p>
           )}
@@ -169,7 +170,7 @@ export function Footer() {
           </div>
           {socials.length > 0 && (
             <div className="mt-5 border-t border-white/10 pt-4">
-              <p className="text-xs text-white/50">Siga a MotorDiesel</p>
+              <p className="text-xs text-white/65">Siga a MotorDiesel</p>
               <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1" aria-label="Redes sociais">
                 {socials.map(({ key, label, icon: Icon, href }) => (
                   <li key={key}>

@@ -13,6 +13,10 @@
      (o #DB1D21 fica em 3,7:1 e 3,3:1). */
   --brand-red-on-dark: #f3474c;
   --brand-ice: #ecf3ff;
+  /* Faixa tricolor da marca (amarelo, vermelho e azul do uniforme e da fachada). */
+  --stripe-yellow: #ffcc29;
+  --stripe-red: #e2101b;
+  --stripe-blue: #002791;
 
   --graphite: #1d2024;
   --graphite-soft: #2a2e33;
@@ -29,6 +33,8 @@
   --color-brand-soft: var(--brand-red-soft);
   --color-brand-on-dark: var(--brand-red-on-dark);
   --color-ice: var(--brand-ice);
+  --color-royal: var(--stripe-blue);
+  --color-stripe-yellow: var(--stripe-yellow);
   --color-graphite: var(--graphite);
   --color-graphite-soft: var(--graphite-soft);
   --color-ink: var(--ink);

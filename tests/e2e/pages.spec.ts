@@ -46,8 +46,30 @@ test("/sobre: conteúdo institucional, foto e contatos", async ({ page }) => {
   await expect(page.locator("#contato")).toBeInViewport();
 });
 
+test("/leve-e-pesada: as duas linhas, com links para a vitrine da home", async ({ page }) => {
+  await page.goto("/leve-e-pesada");
+  await expect(page).toHaveTitle(/Leve e Pesada \| MotorDiesel/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Leve e Pesada/i);
+  await expect(page.getByRole("heading", { name: /Uma loja, duas linhas/i })).toBeVisible();
+  const lines = page.locator("#linhas article");
+  await expect(lines).toHaveCount(2);
+  for (const name of ["Linha leve", "Linha pesada"]) {
+    await expect(page.getByRole("heading", { level: 3, name })).toBeVisible();
+  }
+  for (const img of await page.locator("#linhas img").all()) {
+    expect(await img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0)).toBe(
+      true,
+    );
+  }
+  const links = page.locator("#linhas").getByRole("link", { name: /Ver peças em destaque/i });
+  await expect(links).toHaveCount(2);
+  await links.first().click();
+  await expect(page).toHaveURL(/\/#destaques$/);
+  await expect(page.locator("#destaques")).toBeInViewport();
+});
+
 test("páginas internas: trilha de navegação volta ao início", async ({ page }) => {
-  for (const path of ["/como-comprar", "/sobre"]) {
+  for (const path of ["/como-comprar", "/sobre", "/leve-e-pesada"]) {
     await page.goto(path);
     const trail = page.getByRole("navigation", { name: "Trilha de navegação" });
     await expect(trail.locator('[aria-current="page"]')).toBeVisible();
@@ -65,6 +87,13 @@ test("menu superior abre as páginas e marca a atual", async ({ page, isMobile }
   await nav.getByRole("link", { name: "Como comprar" }).click();
   await expect(page).toHaveURL(/\/como-comprar$/);
   await expect(nav.getByRole("link", { name: "Como comprar" })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+
+  await nav.getByRole("link", { name: "Leve e Pesada" }).click();
+  await expect(page).toHaveURL(/\/leve-e-pesada$/);
+  await expect(nav.getByRole("link", { name: "Leve e Pesada" })).toHaveAttribute(
     "aria-current",
     "page",
   );

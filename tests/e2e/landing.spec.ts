@@ -132,7 +132,7 @@ test("conteúdo aparece mesmo sem JavaScript (sem áreas vazias)", async ({ brow
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto("/");
-  for (const selector of ["#categorias li", "#linhas article", "#destaques li"]) {
+  for (const selector of ["#destaques li", "#categorias li"]) {
     const target = page.locator(selector).first();
     await target.scrollIntoViewIfNeeded();
     await page.evaluate(() => window.scrollBy(0, 200));
@@ -225,6 +225,17 @@ test("todos os links internos levam a seções existentes", async ({ page }) => 
     const id = href!.replace(/^\//, "");
     await expect(page.locator(id), href!).toHaveCount(1);
   }
+});
+
+test("home: Hero, vitrine e categorias nessa ordem, sem a seção das duas linhas", async ({
+  page,
+}) => {
+  const ids = await page
+    .locator("main > section")
+    .evaluateAll((sections) => sections.map((section) => section.id));
+  expect(ids.slice(0, 3)).toEqual(["inicio", "destaques", "categorias"]);
+  await expect(page.locator("#linhas")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: /Uma loja, duas linhas/i })).toHaveCount(0);
 });
 
 test("home não exibe mais “Como comprar” nem “Sobre” completos", async ({ page }) => {

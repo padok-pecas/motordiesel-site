@@ -1,7 +1,7 @@
 // Seções da home usam "/#id" para funcionar também a partir das páginas internas.
 export const navItems = [
   { href: "/#categorias", label: "Categorias" },
-  { href: "/#linhas", label: "Leve e Pesada" },
+  { href: "/leve-e-pesada", label: "Leve e Pesada" },
   { href: "/#destaques", label: "Vitrine" },
   { href: "/como-comprar", label: "Como comprar" },
   { href: "/sobre", label: "Sobre" },
@@ -14,7 +14,7 @@ export const navItems = [
 export const footerNavItems = [
   { href: "/", label: "Início" },
   { href: "/#categorias", label: "Categorias" },
-  { href: "/#linhas", label: "Linha leve e pesada" },
+  { href: "/leve-e-pesada", label: "Linha leve e pesada" },
   { href: "/#destaques", label: "Destaques" },
   { href: "/como-comprar", label: "Como comprar" },
   { href: "/sobre", label: "Sobre" },

@@ -65,14 +65,15 @@ export function PadokMotorDieselLogo({ className, preload }: Props) {
 
 // Assinatura empilhada Padok Peças / MotorDiesel (fundo transparente). WebP com 640px (o dobro
 // da maior largura exibida, 240px, com folga); o PNG de 1200px fica em public/brand como matriz.
-// O slogan foi clareado para #ECF3FF: usar somente sobre fundos escuros.
+// Versão monocromática branca (o vermelho vira branco e os vazados mostram o fundo), para o
+// rodapé azul royal. A versão colorida segue em padok-motordiesel-vertical.webp.
 const ASSINATURA_VERTICAL = {
-  src: "/brand/padok-motordiesel-vertical.webp",
+  src: "/brand/padok-motordiesel-vertical-branco.webp",
   width: 640,
   height: 357,
 };
 
-/** Assinatura empilhada Padok Peças / MotorDiesel — para o rodapé (fundo escuro). */
+/** Assinatura empilhada Padok Peças / MotorDiesel, em branco — para o rodapé (fundo azul). */
 export function PadokMotorDieselStackedLogo({ className }: Props) {
   return (
     <Image

@@ -80,7 +80,7 @@ export function MarketplaceBand() {
           alt=""
           fill
           sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover object-center opacity-80"
+          className="object-cover object-[50%_20%] opacity-80"
         />
       </div>
       <div

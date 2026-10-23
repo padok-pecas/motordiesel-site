@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -111,8 +112,8 @@ export function Lines() {
               >
                 {line.text}
               </p>
-              <a
-                href="#destaques"
+              <Link
+                href="/#destaques"
                 className={cn(
                   "group/link mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-bold uppercase italic",
                   line.tone === "light" ? "text-brand" : "text-white",
@@ -123,7 +124,7 @@ export function Lines() {
                   className="size-4 text-brand transition-transform group-hover/link:translate-x-1"
                   aria-hidden
                 />
-              </a>
+              </Link>
             </Reveal>
           </article>
         ))}
