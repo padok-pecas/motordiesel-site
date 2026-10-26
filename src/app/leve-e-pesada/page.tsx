@@ -18,12 +18,9 @@ export default function LinesPage() {
     <SiteShell>
       <PageHeader
         crumb="Leve e Pesada"
-        title={
-          <>
-            Leve e <span className="text-brand">Pesada</span>
-          </>
-        }
-        description="Do carro do dia a dia ao caminhão que não pode parar: conheça as duas linhas da MotorDiesel."
+        title="Leve e Pesada"
+        // A seção "Uma loja, duas linhas", logo abaixo, já apresenta a página.
+        compact
       />
       <Lines />
     </SiteShell>
