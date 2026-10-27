@@ -33,7 +33,7 @@ export const site = siteSchema.parse({
     // Lista de produtos do vendedor MotorDiesel no Mercado Livre, informada pela empresa em
     // 21/10/2026.
     storeUrl:
-      "https://lista.mercadolivre.com.br/_CustId_3717650448?item_id=MLB5406624413&category_id=MLB191833&seller_id=3717650448&client=recoview-selleritems&recos_listing=true#origin=upp&component=sellerData&typeSeller=classic",
+      null,
   },
 
   // Texto inicial da conversa. Só é usado quando `contact.whatsapp` estiver preenchido.
