@@ -48,10 +48,12 @@ export function Hero() {
 
       <Container className="flex flex-col items-center py-16 text-center sm:py-20">
         {/* Duas frases lado a lado (empilhadas no celular), separadas por um filete, e a
-            assinatura em vermelho embaixo. "do"/"ao" ficam menores, como no layout da marca. */}
+            assinatura em vermelho embaixo. "do"/"ao" ficam menores, como no layout da marca.
+            Tamanho fluido: acompanha a largura da tela, mas também a altura (notebooks com tela
+            baixa), entre 2rem e 4.5rem. */}
         <h1
           id="hero-title"
-          className="animate-rise flex flex-col items-center font-display-wide text-[2.6rem] leading-[0.95] font-extrabold tracking-tight uppercase [animation-delay:80ms] sm:text-6xl lg:text-[5.25rem]"
+          className="animate-rise flex flex-col items-center font-display-wide text-[clamp(2rem,min(6.5vw,9svh),4.5rem)] leading-[0.95] font-extrabold tracking-tight uppercase [animation-delay:80ms]"
         >
           <span className="flex flex-col items-center gap-4 sm:flex-row sm:items-stretch sm:gap-8 lg:gap-12">
             <span className="block">
@@ -70,7 +72,7 @@ export function Hero() {
               </span>
             </span>
           </span>{" "}
-          <span className="mt-4 block text-[0.62em] leading-none text-brand sm:mt-5 sm:text-[0.7em]">
+          <span className="mt-4 block text-[0.7em] leading-none text-brand sm:mt-5">
             {/* No celular quebra em "Simplesmente / a melhor", sem sobrar uma palavra sozinha. */}
             Simplesmente <br className="sm:hidden" />a melhor
           </span>

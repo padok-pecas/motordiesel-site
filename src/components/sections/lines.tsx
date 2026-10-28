@@ -32,7 +32,7 @@ const lines = [
 export function Lines() {
   return (
     <section id="linhas" aria-labelledby="linhas-title" className="bg-ink text-white">
-      <Container className="flex flex-col gap-4 pt-12 pb-8 md:flex-row md:items-end md:justify-between lg:pt-16">
+      <Container className="flex flex-col gap-4 pt-4 pb-7 md:flex-row md:items-end md:justify-between lg:pt-6">
         <div>
           <p className="flex items-center gap-3 text-xs font-semibold tracking-[0.22em] text-brand-on-dark uppercase">
             Do leve ao pesado

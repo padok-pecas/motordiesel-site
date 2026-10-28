@@ -58,7 +58,7 @@ export function PageHeader({
         aria-hidden
       />
 
-      <Container className={compact ? "py-5 lg:py-6" : "py-10 sm:py-12 lg:py-16"}>
+      <Container className={compact ? "pt-5 pb-0 lg:pt-6" : "py-10 sm:py-12 lg:py-16"}>
         <Breadcrumb crumb={crumb} />
         <h1
           className={

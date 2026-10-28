@@ -49,7 +49,7 @@ export default function BrandPage() {
 
       <section aria-labelledby="manual-title" className="bg-white section-y">
         <Container className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-start lg:gap-16">
-          <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-steel">
+          <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-ink">
             <p>
               A Padok Peças possui uma identidade visual própria, desenvolvida para transmitir
               dinamismo, confiança e solidez no universo automotivo.

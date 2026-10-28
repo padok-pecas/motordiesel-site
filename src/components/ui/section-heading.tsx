@@ -39,7 +39,7 @@ export function SectionHeading({
         <p
           className={cn(
             "mt-5 text-lg leading-relaxed",
-            tone === "dark" ? "text-white/70" : "text-steel",
+            tone === "dark" ? "text-white/70" : "text-ink",
           )}
         >
           {description}

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { SiteShell } from "@/components/layout/site-shell";
+import { brandGradient } from "@/components/ui/brand-stripe";
 import { Container } from "@/components/ui/container";
 import { site } from "@/content/site";
 import { cn } from "@/lib/cn";
@@ -58,7 +59,7 @@ export default function MissionPage() {
         <Container className="grid gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
           {statements.map(({ id, icon, title, text }) => (
             <Card key={id} id={id} icon={icon} title={title}>
-              <p className="mt-3 text-lg leading-relaxed text-steel">{text}</p>
+              <p className="mt-3 text-lg leading-relaxed text-ink">{text}</p>
             </Card>
           ))}
           <Card
@@ -82,10 +83,7 @@ export default function MissionPage() {
   );
 }
 
-/**
- * Quadro com moldura fina nas cores da marca (amarelo, vermelho e azul, como a faixa do
- * cabeçalho): o fundo em degradê aparece só no respiro de 3px em volta do conteúdo.
- */
+/** Quadro com moldura fina nas cores da marca (amarelo, vermelho e azul). */
 function Card({
   id,
   icon: Icon,
@@ -103,7 +101,8 @@ function Card({
     <article
       aria-labelledby={`${id}-title`}
       className={cn(
-        "flex bg-[linear-gradient(105deg,var(--stripe-yellow)_0_36%,var(--stripe-red)_36%_63%,var(--stripe-blue)_63%)] p-[3px]",
+        "flex p-[3px]",
+        brandGradient,
         className,
       )}
     >

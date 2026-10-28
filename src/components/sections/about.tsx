@@ -47,7 +47,7 @@ export function About() {
           />
 
           {site.about ? (
-            <p className="mt-5 text-lg leading-relaxed text-steel">{site.about}</p>
+            <p className="mt-5 text-lg leading-relaxed text-ink">{site.about}</p>
           ) : (
             <div className="mt-5 border border-dashed border-steel/40 bg-mist p-5 text-sm leading-relaxed text-steel">
               <p className="font-semibold text-ink">Texto institucional em preparação</p>

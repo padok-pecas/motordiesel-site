@@ -17,6 +17,7 @@ export default function HowToBuyPage() {
   return (
     <SiteShell>
       <PageHeader
+        tone="light"
         crumb="Como comprar"
         title={
           <>
