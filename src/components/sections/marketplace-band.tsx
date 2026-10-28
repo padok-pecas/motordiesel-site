@@ -75,22 +75,22 @@ export function MarketplaceBand() {
       {/* Campo vermelho em diagonal + fachada da loja à direita, separados por uma faixa amarela
           no mesmo ângulo. No desktop a foto ocupa só a área livre depois da diagonal,
           centralizada nos letreiros; no celular o campo vermelho cobre a faixa inteira. */}
-      <div className="absolute inset-y-0 right-0 -z-20 w-full lg:w-[50%]">
+      <div className="absolute inset-y-0 right-0 -z-20 w-full lg:w-[46.5%]">
         <Image
           src="/images/fachada-loja.webp"
           alt=""
           fill
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover object-[50%_20%]"
+          sizes="(min-width: 1024px) 47vw, 100vw"
+          className="object-cover object-[0%_40%]"
         />
       </div>
       {/* Faixa amarela: mesmo recorte do campo vermelho, só um pouco mais largo. */}
       <div
-        className="absolute inset-0 -z-10 hidden bg-stripe-yellow [clip-path:polygon(0_0,62.8%_0,52.8%_100%,0_100%)] lg:block"
+        className="absolute inset-0 -z-10 hidden bg-stripe-yellow [clip-path:polygon(0_0,62.8%_0,53.5%_100%,0_100%)] lg:block"
         aria-hidden
       />
       <div
-        className="absolute inset-0 -z-10 bg-brand lg:[clip-path:polygon(0_0,62%_0,52%_100%,0_100%)]"
+        className="absolute inset-0 -z-10 bg-brand lg:[clip-path:polygon(0_0,62%_0,52.7%_100%,0_100%)]"
         aria-hidden
       />
 

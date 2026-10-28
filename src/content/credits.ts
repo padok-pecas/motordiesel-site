@@ -159,6 +159,7 @@ export const imageCredits = z.array(imageCreditSchema).parse([
   },
   {
     // Foto da fachada da loja, enviada pela MotorDiesel em 20/10/2026 (faixa "Compre online").
+    // Céu estendido em 200px no topo para caber os dois letreiros inteiros ao lado da diagonal.
     file: "fachada-loja.webp",
     author: "MotorDiesel",
     url: null,

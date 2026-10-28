@@ -81,7 +81,7 @@ function pendingText(items: string[]) {
 
 function ColumnTitle({ children }: { children: React.ReactNode }) {
   return (
-    <p className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-white uppercase">
+    <p className="flex items-center gap-2 text-xs font-extrabold tracking-[0.2em] text-white uppercase">
       {children}
     </p>
   );
@@ -114,7 +114,7 @@ export function Footer() {
 
         <nav aria-label="Rodapé">
           <ColumnTitle>Navegação</ColumnTitle>
-          <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-0.5 text-sm">
+          <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-0.5 text-sm font-medium">
             {footerNavItems.map((item) => (
               <li key={item.href}>
                 <Link
@@ -130,7 +130,7 @@ export function Footer() {
 
         <div id="contato">
           <ColumnTitle>Contato</ColumnTitle>
-          <ul className="mt-4 grid gap-3 text-sm">
+          <ul className="mt-4 grid gap-3 text-sm font-medium">
             {!site.contact.address && (
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-stripe-yellow" aria-hidden />
@@ -170,7 +170,7 @@ export function Footer() {
           </div>
           {socials.length > 0 && (
             <div className="mt-5 border-t border-white/10 pt-4">
-              <p className="text-xs text-white/65">Siga a MotorDiesel</p>
+              <p className="text-xs font-medium text-white/65">Siga a MotorDiesel</p>
               <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1" aria-label="Redes sociais">
                 {socials.map(({ key, label, icon: Icon, href }) => (
                   <li key={key}>
