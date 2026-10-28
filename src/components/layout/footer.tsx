@@ -198,7 +198,7 @@ export function Footer() {
         <Container
           className={cn(
             "flex flex-col gap-2 py-5 text-xs sm:flex-row sm:items-center sm:justify-between",
-            hasFloat && "pb-20 sm:pr-20 sm:pb-5",
+            hasFloat && "pb-24 sm:pr-24 sm:pb-5",
           )}
         >
           <p>

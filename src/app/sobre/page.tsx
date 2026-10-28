@@ -17,6 +17,7 @@ export default function AboutPage() {
   return (
     <SiteShell>
       <PageHeader
+        tone="light"
         crumb="Sobre nós"
         title={
           <>

@@ -6,9 +6,11 @@ import { site } from "@/content/site";
 import "./globals.css";
 
 // Montserrat é a fonte da identidade visual (manual da marca): títulos em Bold/ExtraBold e
-// textos corridos em Regular. Fonte variável, então um único arquivo cobre todos os pesos.
+// textos corridos em Regular. Fonte variável: um arquivo por estilo cobre todos os pesos. O
+// itálico é usado só nos títulos da faixa da loja, como no layout aprovado.
 const montserrat = Montserrat({
   subsets: ["latin"],
+  style: ["normal", "italic"],
   variable: "--font-montserrat",
   display: "swap",
 });

@@ -1,10 +1,11 @@
-import { Check, Compass, Target } from "lucide-react";
+import { Check, Compass, Gem, Target, type LucideIcon } from "lucide-react";
 import type { Metadata } from "next";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { SiteShell } from "@/components/layout/site-shell";
 import { Container } from "@/components/ui/container";
 import { site } from "@/content/site";
+import { cn } from "@/lib/cn";
 
 const description = `Missão, visão e valores da ${site.name}: soluções automotivas com tecnologia e segurança, crescimento sólido e atendimento próximo.`;
 
@@ -42,6 +43,7 @@ export default function MissionPage() {
   return (
     <SiteShell>
       <PageHeader
+        tone="light"
         crumb="Missão, Visão e Valores"
         title={
           <>
@@ -50,53 +52,76 @@ export default function MissionPage() {
         }
       />
 
-      <section aria-label="Missão e visão" className="bg-white section-y">
-        <Container className="grid gap-4 md:grid-cols-2 md:gap-6">
-          {statements.map(({ id, icon: Icon, title, text }) => (
-            <article
-              key={id}
-              aria-labelledby={`${id}-title`}
-              className="border-t-4 border-brand bg-mist p-6 sm:p-8"
-            >
-              <span
-                className="flex size-11 -skew-x-6 items-center justify-center bg-brand text-white"
-                aria-hidden
-              >
-                <Icon className="size-5 skew-x-6" />
-              </span>
-              <h2
-                id={`${id}-title`}
-                className="mt-5 font-display-wide text-2xl font-extrabold text-ink uppercase sm:text-3xl"
-              >
-                {title}
-              </h2>
+      {/* Missão, visão e valores lado a lado, em três quadros do mesmo tamanho. No tablet os
+          valores descem e ocupam a largura toda; no celular os três ficam empilhados. */}
+      <section aria-label="Missão, visão e valores" className="bg-white section-y">
+        <Container className="grid gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+          {statements.map(({ id, icon, title, text }) => (
+            <Card key={id} id={id} icon={icon} title={title}>
               <p className="mt-3 text-lg leading-relaxed text-steel">{text}</p>
-            </article>
+            </Card>
           ))}
-        </Container>
-      </section>
-
-      <section aria-labelledby="valores-title" className="bg-ink section-y text-white">
-        <Container>
-          <h2
-            id="valores-title"
-            className="font-display-wide text-2xl font-extrabold uppercase sm:text-3xl"
+          <Card
+            id="valores"
+            icon={Gem}
+            title="Nossos valores"
+            className="md:col-span-2 lg:col-span-1"
           >
-            Nossos <span className="text-brand-on-dark">valores</span>
-          </h2>
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            {values.map((value) => (
-              <li
-                key={value}
-                className="flex items-start gap-3 border-l-2 border-brand bg-white/5 p-4 leading-snug font-semibold"
-              >
-                <Check className="mt-0.5 size-5 shrink-0 text-brand-on-dark" aria-hidden />
-                {value}
-              </li>
-            ))}
-          </ul>
+            <ul className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-1">
+              {values.map((value) => (
+                <li key={value} className="flex items-start gap-3 text-lg leading-snug text-ink">
+                  <Check className="mt-1 size-5 shrink-0 text-brand" aria-hidden />
+                  {value}
+                </li>
+              ))}
+            </ul>
+          </Card>
         </Container>
       </section>
     </SiteShell>
+  );
+}
+
+/**
+ * Quadro com moldura fina nas cores da marca (amarelo, vermelho e azul, como a faixa do
+ * cabeçalho): o fundo em degradê aparece só no respiro de 3px em volta do conteúdo.
+ */
+function Card({
+  id,
+  icon: Icon,
+  title,
+  className,
+  children,
+}: {
+  id: string;
+  icon: LucideIcon;
+  title: string;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <article
+      aria-labelledby={`${id}-title`}
+      className={cn(
+        "flex bg-[linear-gradient(105deg,var(--stripe-yellow)_0_36%,var(--stripe-red)_36%_63%,var(--stripe-blue)_63%)] p-[3px]",
+        className,
+      )}
+    >
+      <div className="w-full bg-mist p-6 sm:p-8">
+        <span
+          className="flex size-11 -skew-x-6 items-center justify-center bg-brand text-white"
+          aria-hidden
+        >
+          <Icon className="size-5 skew-x-6" />
+        </span>
+        <h2
+          id={`${id}-title`}
+          className="mt-5 font-display-wide text-2xl font-extrabold text-ink uppercase sm:text-3xl"
+        >
+          {title}
+        </h2>
+        {children}
+      </div>
+    </article>
   );
 }

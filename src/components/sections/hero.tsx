@@ -8,8 +8,8 @@ export function Hero() {
     <section
       id="inicio"
       aria-labelledby="hero-title"
-      // Ocupa a primeira dobra (descontando o cabeçalho fixo: h-16 / lg:h-18).
-      className="relative isolate flex min-h-[calc(100svh-4rem)] items-center overflow-hidden bg-ink text-white lg:min-h-[calc(100svh-4.5rem)]"
+      // Ocupa a primeira dobra (descontando o cabeçalho fixo: h-18 / lg:h-22).
+      className="relative isolate flex min-h-[calc(100svh-4.5rem)] items-center overflow-hidden bg-ink text-white lg:min-h-[calc(100svh-5.5rem)]"
     >
       {/* Vídeo de fundo sobre a capa (o primeiro quadro do vídeo, já no HTML): a capa aparece
           de imediato e o vídeo surge por cima quando começa a tocar, no mesmo enquadramento.

@@ -40,7 +40,8 @@ export function About() {
             eyebrow="Sobre a MotorDiesel"
             title={
               <>
-                Confiança de quem <span className="text-brand">vive o motor</span>
+                <span className="text-royal">Confiança de quem</span>{" "}
+                <span className="text-brand">vive o motor</span>
               </>
             }
           />

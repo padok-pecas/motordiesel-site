@@ -184,7 +184,7 @@ test("/missao-visao-valores: missão, visão e os cinco valores", async ({ page 
   }
   await expect(page.getByText(/impulsionar a mobilidade/)).toBeVisible();
   await expect(page.getByText(/regiões Norte e Nordeste/)).toBeVisible();
-  await expect(page.locator("section[aria-labelledby='valores-title'] li")).toHaveText([
+  await expect(page.locator("[aria-labelledby='valores-title'] li")).toHaveText([
     "Integridade em cada situação.",
     "Proximidade que gera valor.",
     "Crescimento com responsabilidade.",

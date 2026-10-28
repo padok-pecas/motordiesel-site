@@ -37,6 +37,7 @@ export default function BrandPage() {
   return (
     <SiteShell>
       <PageHeader
+        tone="light"
         crumb="Nossa marca"
         title={
           <>

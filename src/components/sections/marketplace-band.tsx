@@ -70,54 +70,53 @@ export function MarketplaceBand() {
     <section
       id="loja"
       aria-labelledby="loja-title"
-      className="relative isolate overflow-hidden bg-ink text-white"
+      className="relative isolate overflow-hidden bg-brand text-white"
     >
-      {/* Campo vermelho em diagonal + fachada da loja à direita. No desktop a foto ocupa só a
-          área livre depois da diagonal, centralizada nos letreiros. */}
+      {/* Campo vermelho em diagonal + fachada da loja à direita, separados por uma faixa amarela
+          no mesmo ângulo. No desktop a foto ocupa só a área livre depois da diagonal,
+          centralizada nos letreiros; no celular o campo vermelho cobre a faixa inteira. */}
       <div className="absolute inset-y-0 right-0 -z-20 w-full lg:w-[50%]">
         <Image
           src="/images/fachada-loja.webp"
           alt=""
           fill
           sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover object-[50%_20%] opacity-80"
+          className="object-cover object-[50%_20%]"
         />
       </div>
+      {/* Faixa amarela: mesmo recorte do campo vermelho, só um pouco mais largo. */}
       <div
-        className="absolute inset-0 -z-10 bg-gradient-to-br from-brand to-brand-strong lg:[clip-path:polygon(0_0,62%_0,52%_100%,0_100%)]"
+        className="absolute inset-0 -z-10 hidden bg-stripe-yellow [clip-path:polygon(0_0,62.8%_0,52.8%_100%,0_100%)] lg:block"
         aria-hidden
       />
-      <span
-        className="pointer-events-none absolute inset-y-0 left-[56%] -z-10 hidden w-3 -skew-x-[12deg] bg-white/10 lg:block"
+      <div
+        className="absolute inset-0 -z-10 bg-brand lg:[clip-path:polygon(0_0,62%_0,52%_100%,0_100%)]"
         aria-hidden
       />
 
       {/* A terceira coluna fica vazia no desktop: é o espaço da fachada. */}
       <Container className="grid items-center gap-8 py-12 sm:grid-cols-[1fr_auto] lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1.05fr)] lg:gap-10 lg:py-14">
         <Reveal>
-          <p className="flex items-center gap-3 text-xs font-semibold tracking-[0.22em] text-white/85 uppercase">
-            Compre online
-          </p>
           <h2
             id="loja-title"
-            className="mt-3 font-display-wide text-3xl leading-[1.02] font-extrabold uppercase sm:text-4xl lg:text-[2.75rem]"
+            className="font-display-wide text-3xl leading-[1.05] font-extrabold text-balance uppercase italic sm:text-4xl lg:text-[2.1rem] xl:text-[2.5rem]"
           >
-            Sua próxima peça pode estar aqui
+            Sua próxima peça pode estar aqui!
           </h2>
-          <p className="mt-3 max-w-md text-lg text-white/90">
+          <p className="mt-4 max-w-md text-lg text-white">
             Encontre a MotorDiesel no Mercado Livre e conheça nossa loja online.
           </p>
           <div className="mt-6">
-            <StoreButton label="Visitar nossa loja" variant="inverse" />
+            <StoreButton label="Visite nossa loja" variant="inverse" />
           </div>
           {socials.length > 0 && (
-            <div className="mt-6 max-w-md border-t border-white/20 pt-5">
-              <h3 className="font-display-wide text-lg leading-tight font-extrabold uppercase sm:text-xl">
+            <div className="mt-6 max-w-md border-t border-white/40 pt-5">
+              <h3 className="font-display-wide text-lg leading-tight font-extrabold uppercase italic sm:text-xl">
                 Fique por dentro da MotorDiesel
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/85 sm:text-base">
-                Acompanhe nossas novidades, produtos e dicas para as linhas leve e pesada. Siga a
-                MotorDiesel nas redes sociais!
+              <p className="mt-2 text-sm leading-relaxed text-white sm:text-base">
+                Acompanhe nossas novidades, produtos e dicas para as linhas leve e pesada. Siga-nos
+                nas redes sociais!
               </p>
               <ul className="mt-4 flex flex-wrap gap-2.5" aria-label="Redes sociais da MotorDiesel">
                 {socials.map(({ label, href, icon: Icon }) => (
@@ -127,7 +126,7 @@ export function MarketplaceBand() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${label} da MotorDiesel (abre em nova aba)`}
-                      className="group inline-flex min-h-11 items-center gap-2.5 border border-white/60 bg-white/10 px-4 text-sm font-bold text-white transition-colors hover:border-white hover:bg-white hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                      className="group inline-flex min-h-11 items-center gap-2.5 border border-white/70 bg-white/25 px-4 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-white hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                     >
                       <Icon className="size-5 shrink-0" />
                       {label}

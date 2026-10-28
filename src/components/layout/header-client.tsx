@@ -79,7 +79,7 @@ export function HeaderClient({
           : "border-transparent",
       )}
     >
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:h-18 lg:px-10">
+      <div className="mx-auto flex h-18 w-full max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:h-22 lg:px-10">
         {/* Assinatura: Padok Peças | MotorDiesel */}
         <Link href="/" aria-label="MotorDiesel — início" className="shrink-0">
           <PadokMotorDieselLogo preload className="w-60 sm:w-80 lg:w-96" />
@@ -145,7 +145,7 @@ export function HeaderClient({
       <div
         id="menu-mobile"
         hidden={!open}
-        className="fixed inset-x-0 top-16 bottom-0 overflow-y-auto border-t border-line bg-white lg:top-18 xl:hidden"
+        className="fixed inset-x-0 top-18 bottom-0 overflow-y-auto border-t border-line bg-white lg:top-22 xl:hidden"
       >
         <nav aria-label="Menu mobile" className="px-4 pt-4 pb-10 sm:px-6">
           <ul className="divide-y divide-line">

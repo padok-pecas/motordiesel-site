@@ -51,9 +51,9 @@ export function WhatsAppFloatLink({ href }: { href: string }) {
       aria-label="Conversar com a MotorDiesel no WhatsApp (abre em nova aba)"
       title="Conversar no WhatsApp"
       style={{ backgroundColor: WHATSAPP_GREEN }}
-      className="fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 inline-flex size-12 items-center justify-center rounded-full text-white shadow-[0_8px_20px_-8px_rgba(18,20,23,0.55)] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-offset-4 sm:right-6 sm:bottom-6"
+      className="fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 inline-flex size-14 items-center justify-center rounded-full text-white shadow-[0_8px_20px_-8px_rgba(18,20,23,0.55)] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-offset-4 sm:right-6 sm:bottom-6 sm:size-16"
     >
-      <WhatsAppIcon className="size-6" />
+      <WhatsAppIcon className="size-7 sm:size-8" />
     </a>
   );
 }
