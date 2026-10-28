@@ -29,7 +29,7 @@ export function SectionHeading({
       <h2
         id={id}
         className={cn(
-          "mt-4 font-display-wide text-3xl leading-[1.05] font-extrabold uppercase italic sm:text-4xl lg:text-5xl",
+          "mt-4 font-display-wide text-3xl leading-[1.05] font-extrabold uppercase sm:text-4xl lg:text-5xl",
           tone === "dark" ? "text-white" : "text-ink",
         )}
       >

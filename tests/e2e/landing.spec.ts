@@ -12,8 +12,10 @@ test.beforeEach(async ({ page }) => {
 
 test("apresenta a marca e o título, sem faixa de protótipo", async ({ page }) => {
   await expect(page).toHaveTitle(/MotorDiesel/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Do leve");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Do fusível ao motor");
+  const title = page.getByRole("heading", { level: 1 });
+  await expect(title).toContainText(/do leve ao pesado/i);
+  await expect(title).toContainText(/do fusível ao motor/i);
+  await expect(title).toContainText(/simplesmente a melhor/i);
   await expect(page.getByText("Protótipo visual")).toHaveCount(0);
   await expect(page.getByRole("img", { name: "MotorDiesel" }).first()).toBeVisible();
 });
@@ -45,12 +47,6 @@ test("WhatsApp: botões e botão flutuante abrem a conversa oficial", async ({ p
   const float = page.locator('[data-channel="whatsapp-float"]');
   await expect(float).toBeVisible();
   await expect(float).toHaveAccessibleName(/WhatsApp/);
-});
-
-test("“Encontrar minha peça” leva às categorias", async ({ page }) => {
-  await page.getByRole("link", { name: "Encontrar minha peça" }).first().click();
-  await expect(page).toHaveURL(/#categorias$/);
-  await expect(page.getByRole("heading", { name: /Navegue por categoria/i })).toBeInViewport();
 });
 
 test("categorias: quatro cards que abrem a vitrine já filtrada", async ({ page }) => {

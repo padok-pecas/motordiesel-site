@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-import { InstagramIcon } from "@/components/ui/brand-icons";
+import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "@/components/ui/brand-icons";
 import { BrandStripe } from "@/components/ui/brand-stripe";
 import { PadokMotorDieselLogo } from "@/components/ui/logo";
 import { cn } from "@/lib/cn";
@@ -18,12 +18,22 @@ import { isNavGroup, navItems } from "./nav-items";
  * os botões dos canais já prontos do `Header` (servidor): assim a configuração do site e a
  * validação com zod não vão para o JavaScript do navegador.
  */
+/** Ícones dos canais no cabeçalho, na ordem do layout aprovado. */
+const socialChannels = [
+  { key: "whatsapp", name: "WhatsApp", Icon: WhatsAppIcon },
+  { key: "instagram", name: "Instagram", Icon: InstagramIcon },
+  { key: "facebook", name: "Facebook", Icon: FacebookIcon },
+] as const;
+
+type SocialLinks = Record<(typeof socialChannels)[number]["key"], string | null>;
+
 export function HeaderClient({
-  instagramUrl,
+  socialLinks,
   storeCta,
   mobileCtas,
 }: {
-  instagramUrl: string | null;
+  /** Endereços oficiais; canais sem endereço (`null`) não aparecem. */
+  socialLinks: SocialLinks;
   /** Botão da loja no cabeçalho (desktop). */
   storeCta: React.ReactNode;
   /** Botões dos canais no menu mobile. */
@@ -35,6 +45,7 @@ export function HeaderClient({
   // Marca no menu a página interna aberta (/como-comprar, /sobre...).
   const pathname = usePathname();
   const current = (href: string) => (href === pathname ? "page" : undefined);
+  const instagramUrl = socialLinks.instagram;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -75,7 +86,7 @@ export function HeaderClient({
         </Link>
 
         <nav aria-label="Principal" className="hidden xl:block">
-          <ul className="flex items-center gap-8">
+          <ul className="flex items-center gap-7 2xl:gap-9">
             {navItems.map((item) =>
               isNavGroup(item) ? (
                 <NavDropdown key={item.label} group={item} pathname={pathname} />
@@ -84,7 +95,7 @@ export function HeaderClient({
                   <Link
                     href={item.href}
                     aria-current={current(item.href)}
-                    className="relative py-2 text-sm font-semibold text-ink/80 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-brand after:transition-transform after:duration-300 hover:text-ink hover:after:scale-x-100 aria-[current=page]:text-ink aria-[current=page]:after:scale-x-100"
+                    className="relative py-2 text-sm font-medium whitespace-nowrap text-ink/85 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-brand after:transition-transform after:duration-300 hover:text-ink hover:after:scale-x-100 aria-[current=page]:text-ink aria-[current=page]:after:scale-x-100"
                   >
                     {item.label}
                   </Link>
@@ -94,19 +105,25 @@ export function HeaderClient({
           </ul>
         </nav>
 
-        <div className="ml-auto hidden items-center gap-2 lg:flex xl:ml-0">
-          {instagramUrl && (
-            <a
-              href={instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram da MotorDiesel (abre em nova aba)"
-              title="Instagram da MotorDiesel"
-              className="flex size-11 items-center justify-center text-ink/70 transition-colors hover:text-brand"
-            >
-              <InstagramIcon className="size-5" />
-            </a>
-          )}
+        <div className="ml-auto hidden items-center gap-4 lg:flex xl:ml-0">
+          <ul className="flex items-center" aria-label="Canais da MotorDiesel">
+            {socialChannels.map(({ key, name, Icon }) =>
+              socialLinks[key] ? (
+                <li key={key}>
+                  <a
+                    href={socialLinks[key]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${name} da MotorDiesel (abre em nova aba)`}
+                    title={`${name} da MotorDiesel`}
+                    className="flex size-10 items-center justify-center text-ink transition-colors hover:text-brand"
+                  >
+                    <Icon className="size-5" />
+                  </a>
+                </li>
+              ) : null,
+            )}
+          </ul>
           {storeCta}
         </div>
 
@@ -146,7 +163,7 @@ export function HeaderClient({
                           href={child.href}
                           aria-current={current(child.href)}
                           onClick={() => setOpen(false)}
-                          className="flex min-h-11 items-center border-l-2 border-line pl-4 font-display-wide text-xl font-bold text-ink uppercase italic aria-[current=page]:border-brand aria-[current=page]:text-brand"
+                          className="flex min-h-11 items-center border-l-2 border-line pl-4 font-display-wide text-xl font-bold text-ink uppercase aria-[current=page]:border-brand aria-[current=page]:text-brand"
                         >
                           {child.label}
                         </Link>
@@ -160,7 +177,7 @@ export function HeaderClient({
                     href={item.href}
                     aria-current={current(item.href)}
                     onClick={() => setOpen(false)}
-                    className="flex items-center py-4 font-display-wide text-2xl font-bold text-ink uppercase italic aria-[current=page]:text-brand"
+                    className="flex items-center py-4 font-display-wide text-2xl font-bold text-ink uppercase aria-[current=page]:text-brand"
                   >
                     {item.label}
                   </Link>

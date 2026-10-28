@@ -39,7 +39,7 @@ export function Lines() {
           </p>
           <h2
             id="linhas-title"
-            className="mt-4 font-display-wide text-3xl leading-[1.05] font-extrabold uppercase italic sm:text-4xl lg:text-5xl"
+            className="mt-4 font-display-wide text-3xl leading-[1.05] font-extrabold uppercase sm:text-4xl lg:text-5xl"
           >
             Uma loja, <span className="text-brand">duas linhas</span>
           </h2>
@@ -100,7 +100,7 @@ export function Lines() {
               </p>
               <h3
                 id={`linha-${line.id}`}
-                className="mt-2 font-display-wide text-3xl font-black uppercase italic sm:text-4xl"
+                className="mt-2 font-display-wide text-3xl font-extrabold uppercase sm:text-4xl"
               >
                 {line.title}
               </h3>
@@ -115,7 +115,7 @@ export function Lines() {
               <Link
                 href="/#destaques"
                 className={cn(
-                  "group/link mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-bold uppercase italic",
+                  "group/link mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-bold uppercase",
                   line.tone === "light" ? "text-brand" : "text-white",
                 )}
               >

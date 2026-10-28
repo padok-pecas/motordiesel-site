@@ -1,3 +1,4 @@
+import { getWhatsappUrl } from "@/lib/store";
 import { StoreButton } from "@/components/ui/store-button";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { site } from "@/content/site";
@@ -8,7 +9,11 @@ import { HeaderClient } from "./header-client";
 export function Header() {
   return (
     <HeaderClient
-      instagramUrl={site.social.instagram}
+      socialLinks={{
+        whatsapp: getWhatsappUrl(),
+        instagram: site.social.instagram,
+        facebook: site.social.facebook,
+      }}
       storeCta={<StoreButton label="Loja no Mercado Livre" size="sm" />}
       mobileCtas={
         <>

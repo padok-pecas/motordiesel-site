@@ -1,21 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Saira } from "next/font/google";
+import { Montserrat } from "next/font/google";
 
 import { site } from "@/content/site";
 
 import "./globals.css";
 
-// Saira só é usada nos títulos (`font-display-wide`), sempre em itálico: carregar também o
-// estilo normal pré-carregava ~99 KB sem uso.
-const saira = Saira({
+// Montserrat é a fonte da identidade visual (manual da marca): títulos em Bold/ExtraBold e
+// textos corridos em Regular. Fonte variável, então um único arquivo cobre todos os pesos.
+const montserrat = Montserrat({
   subsets: ["latin"],
-  style: ["italic"],
-  axes: ["wdth"],
-  variable: "--font-saira",
+  variable: "--font-montserrat",
   display: "swap",
 });
-
-const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap" });
 
 const description = `Autopeças para veículos leves e pesados em ${site.city} – ${site.state}. Compre pela loja da MotorDiesel no Mercado Livre.`;
 
@@ -37,7 +33,7 @@ export const viewport: Viewport = { themeColor: "#ffffff" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={`${saira.variable} ${archivo.variable}`}>
+    <html lang="pt-BR" className={montserrat.variable}>
       <body>{children}</body>
     </html>
   );

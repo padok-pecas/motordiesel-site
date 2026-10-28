@@ -66,7 +66,7 @@ export default function MissionPage() {
               </span>
               <h2
                 id={`${id}-title`}
-                className="mt-5 font-display-wide text-2xl font-extrabold text-ink uppercase italic sm:text-3xl"
+                className="mt-5 font-display-wide text-2xl font-extrabold text-ink uppercase sm:text-3xl"
               >
                 {title}
               </h2>
@@ -80,7 +80,7 @@ export default function MissionPage() {
         <Container>
           <h2
             id="valores-title"
-            className="font-display-wide text-2xl font-extrabold uppercase italic sm:text-3xl"
+            className="font-display-wide text-2xl font-extrabold uppercase sm:text-3xl"
           >
             Nossos <span className="text-brand-on-dark">valores</span>
           </h2>

@@ -48,12 +48,12 @@ export function HowToBuy() {
             <Reveal as="li" key={step.title} step={index} className="bg-graphite">
               <div className="group h-full border-t-2 border-brand/0 p-6 pt-5 transition-colors duration-300 hover:border-brand md:p-7">
                 <span
-                  className="inline-flex size-9 -skew-x-6 items-center justify-center bg-brand font-display-wide text-sm font-black text-white italic"
+                  className="inline-flex size-9 -skew-x-6 items-center justify-center bg-brand font-display-wide text-sm font-extrabold text-white"
                   aria-hidden
                 >
                   <span className="skew-x-6">0{index + 1}</span>
                 </span>
-                <h3 className="mt-4 font-display-wide text-xl font-extrabold uppercase italic">
+                <h3 className="mt-4 font-display-wide text-xl font-extrabold uppercase">
                   <span className="sr-only">Passo {index + 1}: </span>
                   {step.title}
                 </h3>

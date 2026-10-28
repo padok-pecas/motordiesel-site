@@ -9,7 +9,7 @@ import { cn } from "@/lib/cn";
 import type { NavGroup } from "./nav-items";
 
 const triggerClasses =
-  "relative inline-flex items-center gap-1 py-2 text-sm font-semibold text-ink/80 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-brand after:transition-transform after:duration-300 hover:text-ink hover:after:scale-x-100";
+  "relative inline-flex items-center gap-1 py-2 text-sm whitespace-nowrap font-medium text-ink/85 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-brand after:transition-transform after:duration-300 hover:text-ink hover:after:scale-x-100";
 
 /**
  * Menu suspenso do cabeçalho (desktop). Botão com `aria-expanded` que abre uma lista de links:

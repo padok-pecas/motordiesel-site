@@ -19,7 +19,7 @@ export default function CreditsPage() {
           <ArrowLeft className="size-4" aria-hidden /> Voltar
         </Link>
         <MotorDieselBadge className="mt-8 w-40" />
-        <h1 className="mt-8 font-display-wide text-3xl font-black text-ink uppercase italic">
+        <h1 className="mt-8 font-display-wide text-3xl font-extrabold text-ink uppercase">
           Créditos das imagens
         </h1>
         <p className="mt-3 text-steel">

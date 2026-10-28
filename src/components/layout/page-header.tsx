@@ -57,7 +57,7 @@ export function PageHeader({
           className={
             compact
               ? "sr-only"
-              : "mt-5 max-w-3xl font-display-wide text-4xl leading-[0.98] font-black uppercase italic sm:text-5xl lg:text-6xl"
+              : "mt-5 max-w-3xl font-display-wide text-4xl leading-[0.98] font-extrabold uppercase sm:text-5xl lg:text-6xl"
           }
         >
           {title}

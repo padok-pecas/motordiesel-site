@@ -75,7 +75,7 @@ export function ProductGrid({
                   {product.category}
                   <span className="text-steel"> · Linha {product.line.toLowerCase()}</span>
                 </p>
-                <h3 className="mt-1.5 font-display-wide text-[0.95rem] leading-tight font-extrabold break-words hyphens-auto text-ink uppercase italic sm:text-lg">
+                <h3 className="mt-1.5 font-display-wide text-[0.95rem] leading-tight font-extrabold break-words hyphens-auto text-ink uppercase sm:text-lg">
                   {product.name}
                 </h3>
                 <p className="mt-1 text-xs text-steel">Imagem ilustrativa</p>

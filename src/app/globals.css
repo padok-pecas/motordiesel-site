@@ -43,8 +43,8 @@
   --color-mist: var(--mist);
   --color-paper: var(--paper);
 
-  --font-sans: var(--font-archivo);
-  --font-display: var(--font-saira);
+  --font-sans: var(--font-montserrat);
+  --font-display: var(--font-montserrat);
 }
 
 @layer base {
@@ -65,10 +65,9 @@
   }
 }
 
-/* Títulos: Saira levemente expandida e inclinada, ecoando o desenho do logo. */
+/* Títulos: Montserrat (fonte da marca), em pé e com peso Bold/ExtraBold definido em cada uso. */
 @utility font-display-wide {
-  font-family: var(--font-saira);
-  font-variation-settings: "wdth" 112;
+  font-family: var(--font-montserrat);
 }
 
 /* Recorte em paralelogramo, mesmo ângulo do selo MotorDiesel. */

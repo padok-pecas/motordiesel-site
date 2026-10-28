@@ -68,7 +68,7 @@ export function FeaturedProducts() {
         {/* Faixa comercial: os dois canais lado a lado, sem repetir botões gigantes */}
         <div className="mt-10 flex flex-col gap-5 bg-white p-5 ring-1 ring-line sm:p-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <p className="font-display-wide text-lg font-extrabold text-ink uppercase italic">
+            <p className="font-display-wide text-lg font-extrabold text-ink uppercase">
               Não achou a peça que procura?
             </p>
             <p className="mt-1 text-sm text-steel">

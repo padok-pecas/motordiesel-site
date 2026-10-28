@@ -72,7 +72,7 @@ export default function BrandPage() {
             </span>
             <h2
               id="manual-title"
-              className="mt-5 font-display-wide text-2xl font-extrabold text-ink uppercase italic"
+              className="mt-5 font-display-wide text-2xl font-extrabold text-ink uppercase"
             >
               Manual da Marca Padok Peças
             </h2>

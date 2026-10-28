@@ -82,7 +82,7 @@ export function Segments() {
                       aria-hidden
                     />
                     <span
-                      className="absolute top-3 left-4 font-display-wide text-xs font-extrabold tracking-wider text-white/40 italic sm:left-5"
+                      className="absolute top-3 left-4 font-display-wide text-xs font-extrabold tracking-wider text-white/40 sm:left-5"
                       aria-hidden
                     >
                       {String(index + 1).padStart(2, "0")}
@@ -93,13 +93,13 @@ export function Segments() {
                     <p className="text-[0.65rem] font-semibold tracking-wider text-brand uppercase sm:text-[0.7rem]">
                       Linha {segment.line}
                     </p>
-                    <h3 className="mt-1.5 font-display-wide text-[0.95rem] leading-tight font-extrabold break-words hyphens-auto text-ink uppercase italic sm:text-xl lg:text-lg xl:text-xl">
+                    <h3 className="mt-1.5 font-display-wide text-[0.95rem] leading-tight font-extrabold break-words hyphens-auto text-ink uppercase sm:text-xl lg:text-lg xl:text-xl">
                       <KeepHyphenated text={segment.name} />
                     </h3>
                     <p className="mt-1.5 text-xs leading-relaxed text-steel sm:text-sm">
                       {segment.description}
                     </p>
-                    <span className="mt-auto inline-flex items-center gap-2 pt-4 text-xs font-bold text-ink uppercase italic transition-colors group-hover:text-brand sm:text-sm">
+                    <span className="mt-auto inline-flex items-center gap-2 pt-4 text-xs font-bold text-ink uppercase transition-colors group-hover:text-brand sm:text-sm">
                       Ver peças
                       <ArrowRight
                         className="size-4 text-brand transition-transform group-hover:translate-x-1"

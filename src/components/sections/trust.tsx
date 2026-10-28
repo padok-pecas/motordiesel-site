@@ -101,7 +101,7 @@ export function Trust() {
               </p>
               <h2
                 id="confianca-title"
-                className="mt-3 font-display-wide text-3xl leading-[1.02] font-black uppercase italic sm:text-4xl"
+                className="mt-3 font-display-wide text-3xl leading-[1.02] font-extrabold uppercase sm:text-4xl"
               >
                 {score || testimonials.length > 0 ? (
                   <>
@@ -117,7 +117,7 @@ export function Trust() {
               {score ? (
                 <div className="mt-4">
                   <p className="flex items-center gap-3">
-                    <span className="font-display-wide text-3xl font-black italic">
+                    <span className="font-display-wide text-3xl font-extrabold">
                       {formatNumber(score.rating)}
                     </span>
                     <Stars rating={score.rating} />
@@ -142,7 +142,7 @@ export function Trust() {
                   href={reviews.profileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex min-h-12 w-fit -skew-x-6 items-center gap-2 bg-white px-4 py-2 font-display-wide text-[0.78rem] leading-tight font-bold text-brand uppercase italic shadow-[0_12px_30px_-14px_rgba(0,0,0,0.6)] transition-colors hover:bg-ink hover:text-white sm:whitespace-nowrap"
+                  className="mt-6 inline-flex min-h-12 w-fit -skew-x-6 items-center gap-2 bg-white px-4 py-2 font-display-wide text-[0.78rem] leading-tight font-bold text-brand uppercase shadow-[0_12px_30px_-14px_rgba(0,0,0,0.6)] transition-colors hover:bg-ink hover:text-white sm:whitespace-nowrap"
                 >
                   <span className="inline-flex skew-x-6 items-center gap-2">
                     Ver todas as avaliações no Google
@@ -189,7 +189,7 @@ export function Trust() {
                           <span className="row-span-2 flex size-9 -skew-x-6 items-center justify-center bg-brand-soft text-brand">
                             <Icon className="size-4 skew-x-6" aria-hidden />
                           </span>
-                          <h3 className="font-display-wide text-base leading-tight font-extrabold text-ink uppercase italic sm:mt-4">
+                          <h3 className="font-display-wide text-base leading-tight font-extrabold text-ink uppercase sm:mt-4">
                             {title}
                           </h3>
                           <p className="mt-1 text-sm leading-relaxed text-steel sm:mt-2">{text}</p>

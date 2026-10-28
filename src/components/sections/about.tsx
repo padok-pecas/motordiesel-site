@@ -66,7 +66,7 @@ export function About() {
             </p>
             <a
               href="#contato"
-              className="group inline-flex min-h-11 items-center gap-2 text-sm font-bold text-brand uppercase italic"
+              className="group inline-flex min-h-11 items-center gap-2 text-sm font-bold text-brand uppercase"
             >
               Ver contatos
               <ArrowDown

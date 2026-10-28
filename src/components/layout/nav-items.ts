@@ -10,6 +10,14 @@ export const navItems: readonly NavEntry[] = [
   // "#inicio" é a Hero com o vídeo, no topo da página principal.
   { href: "/#inicio", label: "Home" },
   {
+    label: "Institucional",
+    items: [
+      { href: "/sobre", label: "Sobre nós" },
+      { href: "/missao-visao-valores", label: "Missão, Visão e Valores" },
+      { href: "/nossa-marca", label: "Nossa marca" },
+    ],
+  },
+  {
     label: "Produtos",
     items: [
       { href: "/#categorias", label: "Categorias" },
@@ -18,14 +26,6 @@ export const navItems: readonly NavEntry[] = [
     ],
   },
   { href: "/como-comprar", label: "Como comprar" },
-  {
-    label: "Institucional",
-    items: [
-      { href: "/sobre", label: "Sobre nós" },
-      { href: "/missao-visao-valores", label: "Missão, Visão e Valores" },
-      { href: "/nossa-marca", label: "Nossa marca" },
-    ],
-  },
 ];
 
 /**

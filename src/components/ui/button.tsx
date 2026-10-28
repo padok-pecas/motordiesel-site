@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 export const buttonStyles = {
-  base: "group inline-flex items-center whitespace-nowrap justify-center gap-2 font-display-wide font-bold uppercase italic tracking-wide transition-[background-color,color,border-color,box-shadow,transform] duration-200 active:translate-y-px -skew-x-6",
+  base: "group inline-flex items-center whitespace-nowrap justify-center gap-2 font-display-wide font-bold uppercase tracking-wide transition-[background-color,color,border-color,box-shadow,transform] duration-200 active:translate-y-px -skew-x-6",
   size: {
     md: "min-h-12 px-6 text-[0.95rem]",
     sm: "min-h-11 px-4 text-[0.8rem]",

@@ -100,7 +100,7 @@ export function MarketplaceBand() {
           </p>
           <h2
             id="loja-title"
-            className="mt-3 font-display-wide text-3xl leading-[1.02] font-black uppercase italic sm:text-4xl lg:text-[2.75rem]"
+            className="mt-3 font-display-wide text-3xl leading-[1.02] font-extrabold uppercase sm:text-4xl lg:text-[2.75rem]"
           >
             Sua próxima peça pode estar aqui
           </h2>
@@ -112,7 +112,7 @@ export function MarketplaceBand() {
           </div>
           {socials.length > 0 && (
             <div className="mt-6 max-w-md border-t border-white/20 pt-5">
-              <h3 className="font-display-wide text-lg leading-tight font-extrabold uppercase italic sm:text-xl">
+              <h3 className="font-display-wide text-lg leading-tight font-extrabold uppercase sm:text-xl">
                 Fique por dentro da MotorDiesel
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-white/85 sm:text-base">
