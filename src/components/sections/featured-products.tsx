@@ -36,7 +36,7 @@ export function FeaturedProducts() {
           <DemoBadge>Produtos demonstrativos</DemoBadge>
         </div>
 
-        {/* Régua decorativa: a vitrine está ordenada da peça menor para a maior */}
+        {/* Régua decorativa "do fusível ao motor" */}
         <div
           className="mt-8 flex items-center gap-3 text-[0.68rem] font-semibold tracking-[0.2em] text-steel uppercase"
           aria-hidden
