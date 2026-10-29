@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { DemoBadge } from "@/components/ui/demo-badge";
+import { MercadoLivreButton } from "@/components/ui/mercado-livre-button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { StoreButton } from "@/components/ui/store-button";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
@@ -49,6 +50,7 @@ export function FeaturedProducts() {
 
         <ProductGrid
           products={demoProducts}
+          storeButton={<MercadoLivreButton />}
           buyButton={
             <StoreButton
               label={

@@ -20,6 +20,8 @@ export type ChannelButtonProps = {
   size?: ButtonSize;
   /** Ocupa toda a largura disponível (menu mobile, cards). */
   fullWidth?: boolean;
+  /** Sem o estilo padrão de botão (inclinado): a aparência vem toda de `className`. */
+  bare?: boolean;
   className?: string;
 };
 
@@ -37,6 +39,7 @@ export function ChannelButton({
   variant = "primary",
   size = "md",
   fullWidth = false,
+  bare = false,
   className,
 }: ChannelButtonProps) {
   const [notice, setNotice] = useState(false);
@@ -48,9 +51,11 @@ export function ChannelButton({
     return () => window.clearTimeout(timer);
   }, [notice]);
 
-  const classes = buttonClasses(variant, size, cn(fullWidth && "w-full", className));
+  const classes = bare
+    ? cn(fullWidth && "w-full", className)
+    : buttonClasses(variant, size, cn(fullWidth && "w-full", className));
   const content = (
-    <span className="inline-flex skew-x-6 items-center gap-2">
+    <span className={cn("inline-flex items-center gap-2", !bare && "skew-x-6")}>
       {icon}
       {label}
     </span>

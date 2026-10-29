@@ -139,6 +139,70 @@
 }
 
 /*
+ * Botão amarelo do Mercado Livre (vitrine): halo que pulsa devagar e um reflexo que cruza a
+ * superfície e volta após uma pausa. O reflexo fica entre o fundo e o conteúdo (z-index), então
+ * não apaga o ícone nem o texto. `--ml-glow` controla a intensidade do halo; o hover a aumenta.
+ * Com `prefers-reduced-motion: reduce`, fica só o halo fixo, sem animação nem aumento.
+ */
+.ml-glow {
+  --ml-glow: 1;
+  box-shadow: 0 0 14px 2px rgb(255 230 0 / 0.4);
+}
+.ml-glow::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  z-index: 0;
+  width: 40%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgb(255 255 240 / 0.85) 50%,
+    transparent 100%
+  );
+  transform: translateX(-120%) skewX(-20deg);
+  pointer-events: none;
+}
+@keyframes ml-halo {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgb(255 230 0 / calc(0.35 * var(--ml-glow))),
+      0 0 calc(12px * var(--ml-glow)) calc(1px * var(--ml-glow)) rgb(255 220 0 / 0.45);
+  }
+  50% {
+    box-shadow:
+      0 0 0 calc(5px * var(--ml-glow)) rgb(255 230 0 / calc(0.16 * var(--ml-glow))),
+      0 0 calc(26px * var(--ml-glow)) calc(6px * var(--ml-glow)) rgb(255 220 0 / 0.6);
+  }
+}
+@keyframes ml-shine {
+  0% {
+    transform: translateX(-120%) skewX(-20deg);
+  }
+  /* Cruza em ~1,2 s e espera o resto do ciclo para passar de novo. */
+  38%,
+  100% {
+    transform: translateX(330%) skewX(-20deg);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ml-glow {
+    animation: ml-halo 2.8s ease-in-out infinite;
+    transition: transform 0.3s ease;
+  }
+  .ml-glow::after {
+    animation: ml-shine 3.2s ease-in-out infinite;
+  }
+  .ml-glow:hover,
+  .ml-glow:focus-visible {
+    --ml-glow: 1.6;
+    transform: scale(1.03);
+  }
+}
+
+/*
  * Revelação ao rolar, 100% CSS (scroll-driven animation): não depende de JavaScript nem de
  * hidratação. O efeito só existe enquanto o elemento atravessa a borda inferior da tela.
  * `forwards` (e não `both`) é essencial: antes de entrar na tela o elemento fica no estado

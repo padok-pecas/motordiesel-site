@@ -22,14 +22,17 @@ function matches(product: DemoProduct, filter: Filter) {
 
 /**
  * Vitrine com filtro por linha. O botão "Ver na loja" chega pronto do servidor (`buyButton`),
- * para que a configuração do site e o zod não entrem no JavaScript do navegador.
+ * para que a configuração do site e o zod não entrem no JavaScript do navegador. O mesmo vale
+ * para `storeButton`, alinhado à direita na linha dos filtros.
  */
 export function ProductGrid({
   products,
   buyButton,
+  storeButton,
 }: {
   products: DemoProduct[];
   buyButton: React.ReactNode;
+  storeButton?: React.ReactNode;
 }) {
   const [filter, setFilter] = useState<Filter>("todas");
   // Os cards de "Navegue por segmento" abrem a vitrine já filtrada.
@@ -38,23 +41,26 @@ export function ProductGrid({
 
   return (
     <>
-      <div role="group" aria-label="Filtrar por linha" className="mt-8 flex flex-wrap gap-2">
-        {filters.map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            aria-pressed={filter === item.id}
-            onClick={() => setFilter(item.id)}
-            className={cn(
-              "min-h-11 -skew-x-6 border px-4 text-sm font-semibold transition-colors",
-              filter === item.id
-                ? "border-ink bg-ink text-white"
-                : "border-line bg-white text-ink/75 hover:border-ink/40 hover:text-ink",
-            )}
-          >
-            <span className="inline-block skew-x-6">{item.label}</span>
-          </button>
-        ))}
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+        <div role="group" aria-label="Filtrar por linha" className="flex flex-wrap gap-2">
+          {filters.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              aria-pressed={filter === item.id}
+              onClick={() => setFilter(item.id)}
+              className={cn(
+                "min-h-11 -skew-x-6 border px-4 text-sm font-semibold transition-colors",
+                filter === item.id
+                  ? "border-ink bg-ink text-white"
+                  : "border-line bg-white text-ink/75 hover:border-ink/40 hover:text-ink",
+              )}
+            >
+              <span className="inline-block skew-x-6">{item.label}</span>
+            </button>
+          ))}
+        </div>
+        {storeButton && <div className="ml-auto">{storeButton}</div>}
       </div>
 
       <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
