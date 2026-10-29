@@ -11,7 +11,7 @@ import { ChannelButton } from "./channel-button";
  * configuração.
  */
 export function StoreButton({
-  label = "Comprar pelo Mercado Livre",
+  label = "Compre em nossa Loja Virtual",
   variant = "primary",
   size = "md",
   fullWidth,

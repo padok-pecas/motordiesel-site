@@ -1,5 +1,5 @@
 import { getWhatsappUrl } from "@/lib/store";
-import { MercadoLivreButton } from "@/components/ui/mercado-livre-button";
+import { StoreGlowButton } from "@/components/ui/store-glow-button";
 import { StoreButton } from "@/components/ui/store-button";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { site } from "@/content/site";
@@ -15,7 +15,7 @@ export function Header() {
         instagram: site.social.instagram,
         facebook: site.social.facebook,
       }}
-      storeCta={<MercadoLivreButton label="Loja no Mercado Livre" />}
+      storeCta={<StoreGlowButton />}
       mobileCtas={
         <>
           <StoreButton fullWidth />

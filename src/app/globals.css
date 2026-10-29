@@ -139,45 +139,40 @@
 }
 
 /*
- * Botão amarelo do Mercado Livre (vitrine): halo que pulsa devagar e um reflexo que cruza a
+ * Botão vermelho "Nossa loja virtual" (cabeçalho e vitrine): halo que pulsa devagar e um reflexo que cruza a
  * superfície e volta após uma pausa. O reflexo fica entre o fundo e o conteúdo (z-index), então
- * não apaga o ícone nem o texto. `--ml-glow` controla a intensidade do halo; o hover a aumenta.
+ * não apaga o ícone nem o texto. `--store-glow` controla a intensidade do halo; o hover a aumenta.
  * Com `prefers-reduced-motion: reduce`, fica só o halo fixo, sem animação nem aumento.
  */
-.ml-glow {
-  --ml-glow: 1;
-  box-shadow: 0 0 14px 2px rgb(255 230 0 / 0.4);
+.store-glow {
+  --store-glow: 1;
+  box-shadow: 0 0 14px 2px rgb(219 29 33 / 0.45);
 }
-.ml-glow::after {
+.store-glow::after {
   content: "";
   position: absolute;
   inset-block: 0;
   left: 0;
   z-index: 0;
-  width: 40%;
-  background: linear-gradient(
-    100deg,
-    transparent 0%,
-    rgb(255 255 240 / 0.85) 50%,
-    transparent 100%
-  );
+  width: 45%;
+  background: linear-gradient(100deg, transparent 0%, rgb(255 255 255 / 0.8) 50%, transparent 100%);
   transform: translateX(-120%) skewX(-20deg);
   pointer-events: none;
 }
-@keyframes ml-halo {
+@keyframes store-halo {
   0%,
   100% {
     box-shadow:
-      0 0 0 0 rgb(255 230 0 / calc(0.35 * var(--ml-glow))),
-      0 0 calc(12px * var(--ml-glow)) calc(1px * var(--ml-glow)) rgb(255 220 0 / 0.45);
+      0 0 0 0 rgb(219 29 33 / calc(0.35 * var(--store-glow))),
+      0 0 calc(12px * var(--store-glow)) calc(1px * var(--store-glow)) rgb(240 40 45 / 0.45);
   }
   50% {
     box-shadow:
-      0 0 0 calc(5px * var(--ml-glow)) rgb(255 230 0 / calc(0.16 * var(--ml-glow))),
-      0 0 calc(26px * var(--ml-glow)) calc(6px * var(--ml-glow)) rgb(255 220 0 / 0.6);
+      0 0 0 calc(5px * var(--store-glow)) rgb(219 29 33 / calc(0.16 * var(--store-glow))),
+      0 0 calc(26px * var(--store-glow)) calc(6px * var(--store-glow)) rgb(240 40 45 / 0.6);
   }
 }
-@keyframes ml-shine {
+@keyframes store-shine {
   0% {
     transform: translateX(-120%) skewX(-20deg);
   }
@@ -188,16 +183,16 @@
   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .ml-glow {
-    animation: ml-halo 2.8s ease-in-out infinite;
+  .store-glow {
+    animation: store-halo 2.8s ease-in-out infinite;
     transition: transform 0.3s ease;
   }
-  .ml-glow::after {
-    animation: ml-shine 3.2s ease-in-out infinite;
+  .store-glow::after {
+    animation: store-shine 3.2s ease-in-out infinite;
   }
-  .ml-glow:hover,
-  .ml-glow:focus-visible {
-    --ml-glow: 1.6;
+  .store-glow:hover,
+  .store-glow:focus-visible {
+    --store-glow: 1.6;
     transform: scale(1.03);
   }
 }
