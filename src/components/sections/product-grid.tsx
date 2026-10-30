@@ -85,7 +85,7 @@ export function ProductGrid({
                   {product.name}
                 </h3>
                 <p className="mt-1 text-xs text-steel">Imagem ilustrativa</p>
-                <div className="mt-auto pt-4">{buyButton}</div>
+                <div className="mt-auto flex justify-center pt-4">{buyButton}</div>
               </div>
             </article>
           </li>

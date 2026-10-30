@@ -2,7 +2,6 @@ import { Container } from "@/components/ui/container";
 import { DemoBadge } from "@/components/ui/demo-badge";
 import { StoreGlowButton } from "@/components/ui/store-glow-button";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { StoreButton } from "@/components/ui/store-button";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { demoProducts } from "@/content/catalog";
 import { showcaseLines } from "@/content/schema";
@@ -53,10 +52,9 @@ export function FeaturedProducts() {
           storeButton={<StoreGlowButton />}
           buyButton={
             <StoreGlowButton
-              fullWidth
-              // Cards estreitos (celular e 1024–1279px): botão mais compacto; no celular o texto pode
-              // quebrar em duas linhas dentro da pílula.
-              className="justify-center max-[359px]:text-[0.58rem]! max-sm:h-auto max-sm:min-h-10 max-sm:py-1.5 max-sm:pr-2.5 max-sm:pl-1 max-sm:text-[0.66rem] max-sm:leading-tight max-sm:whitespace-normal lg:max-xl:pr-3 lg:max-xl:text-[0.66rem] max-sm:[&_img]:size-6"
+              // Versão compacta, centralizada no card. Nos cards estreitos (celular e 1024–1279px)
+              // fica ainda menor; no celular o texto pode quebrar em duas linhas dentro da pílula.
+              className="h-9! pr-4! pl-1! text-[0.68rem]! max-sm:h-auto! max-sm:min-h-8 max-sm:py-1 max-sm:pr-3! max-sm:text-[0.62rem]! max-sm:leading-tight max-sm:whitespace-normal lg:max-xl:pr-3! lg:max-xl:text-[0.62rem]! [&_img]:size-6! max-sm:[&_img]:size-5!"
             />
           }
         />
@@ -71,8 +69,13 @@ export function FeaturedProducts() {
               Veja o catálogo completo na loja ou peça ajuda para encontrar a peça certa.
             </p>
           </div>
-          <div className="flex flex-wrap gap-3">
-            <StoreButton label="Ver todos na loja" />
+          <div className="flex flex-wrap items-center gap-3">
+            <StoreGlowButton
+              label="Ver todos na loja"
+              arrow
+              // Mesma altura do botão "Pedir ajuda" ao lado.
+              className="h-12! pr-6! pl-1.5! text-sm! [&_img]:size-9!"
+            />
             <WhatsAppButton label="Pedir ajuda" variant="outline" />
           </div>
         </div>

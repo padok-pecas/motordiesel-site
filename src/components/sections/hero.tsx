@@ -48,36 +48,33 @@ export function Hero() {
 
       <Container className="flex flex-col items-center py-16 text-center sm:py-20">
         {/* Duas frases lado a lado (empilhadas no celular), separadas por um filete, e a
-            assinatura em vermelho embaixo, na Saira Condensed do layout da marca. "do"/"ao" ficam
-            menores. Como no layout, as duas linhas de cada frase têm a mesma largura (Line) e a
-            assinatura ocupa a largura do bloco todo. Tamanho fluido: acompanha a largura da tela,
-            mas também a altura (notebooks com tela baixa), entre 2.75rem e 6rem. */}
+            assinatura em vermelho embaixo, na Saira do layout da marca. "do"/"ao"
+            ficam menores e a segunda linha de cada frase é um pouco maior, como no layout; as duas
+            linhas de cada frase têm a mesma largura (Line) e a assinatura ocupa o bloco todo.
+            Tamanho fluido: acompanha a largura da tela, mas também a altura (notebooks com tela
+            baixa). */}
         <h1
           id="hero-title"
-          className="animate-rise inline-flex flex-col font-slogan text-[clamp(2.75rem,min(8.5vw,12svh),6rem)] leading-[0.9] font-bold uppercase [animation-delay:80ms]"
+          className="animate-rise inline-flex flex-col font-slogan text-[clamp(2.25rem,min(4.6vw,8.5svh),5rem)] leading-none font-bold uppercase [animation-delay:80ms] [word-spacing:-0.1em]"
         >
-          <span className="flex flex-col items-center gap-3 sm:flex-row sm:items-stretch sm:gap-[0.4em]">
-            <span className="flex flex-col">
+          <span className="flex flex-col items-center gap-4 sm:flex-row sm:items-stretch sm:gap-[0.62em]">
+            <span className="flex flex-col -space-y-[0.05em]">
               <Line>
                 <Small>do</Small> Leve <Small>ao</Small>
               </Line>{" "}
-              {/* Palavras grandes mais espaçadas para igualar a largura das linhas (medido na
-                  Saira Condensed); a margem negativa anula o espaço depois da última letra. */}
-              <Line>
-                <Wide spacing="0.045em">Pesado</Wide>
-              </Line>
+              <Line className="text-[1.08em]">Pesado</Line>
             </span>
-            <span className="hidden w-px bg-white/70 sm:my-[0.15em] sm:block" aria-hidden />{" "}
-            <span className="flex flex-col">
+            <span className="hidden w-px bg-white/60 sm:my-[0.1em] sm:block" aria-hidden />{" "}
+            <span className="flex flex-col -space-y-[0.05em]">
               <Line>
                 <Small>do</Small> Fusível
               </Line>{" "}
-              <Line>
-                <Small>ao</Small> <Wide spacing="0.058em">Motor</Wide>
+              <Line className="text-[1.08em]">
+                <Small>ao</Small> Motor
               </Line>
             </span>
           </span>{" "}
-          <span className="mt-3 block text-[0.75em] leading-none text-brand sm:mt-[0.12em] sm:text-[0.78em] sm:[text-align-last:justify]">
+          <span className="mt-4 block text-[0.79em] text-brand sm:mt-[0.14em] sm:[text-align-last:justify]">
             {/* No celular quebra em "Simplesmente / a melhor", sem sobrar uma palavra sozinha. */}
             Simplesmente <br className="sm:hidden" />a melhor
           </span>
@@ -107,12 +104,7 @@ function Line({ className, children }: { className?: string; children: React.Rea
   );
 }
 
-/** Palavra com espaçamento extra entre as letras, sem sobra depois da última. */
-function Wide({ spacing, children }: { spacing: string; children: React.ReactNode }) {
-  return <span style={{ letterSpacing: spacing, marginRight: `-${spacing}` }}>{children}</span>;
-}
-
 /** Palavras de ligação ("do", "ao") menores, na linha de base das palavras principais. */
 function Small({ children }: { children: React.ReactNode }) {
-  return <span className="text-[0.5em] tracking-normal">{children}</span>;
+  return <span className="text-[0.52em]">{children}</span>;
 }
