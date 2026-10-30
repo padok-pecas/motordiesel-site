@@ -29,13 +29,10 @@ type SocialLinks = Record<(typeof socialChannels)[number]["key"], string | null>
 
 export function HeaderClient({
   socialLinks,
-  storeCta,
   mobileCtas,
 }: {
   /** Endereços oficiais; canais sem endereço (`null`) não aparecem. */
   socialLinks: SocialLinks;
-  /** Botão da loja no cabeçalho (desktop). */
-  storeCta: React.ReactNode;
   /** Botões dos canais no menu mobile. */
   mobileCtas: React.ReactNode;
 }) {
@@ -124,7 +121,6 @@ export function HeaderClient({
               ) : null,
             )}
           </ul>
-          {storeCta}
         </div>
 
         <button

@@ -52,17 +52,11 @@ export function FeaturedProducts() {
           products={demoProducts}
           storeButton={<StoreGlowButton />}
           buyButton={
-            <StoreButton
-              label={
-                <>
-                  <span className="lg:hidden">Ver na loja</span>
-                  <span className="hidden lg:inline">Ver no Mercado Livre</span>
-                </>
-              }
-              variant="subtle"
-              size="sm"
+            <StoreGlowButton
               fullWidth
-              className="px-2 text-[0.7rem] sm:text-[0.8rem]"
+              // Cards estreitos (celular e 1024–1279px): botão mais compacto; no celular o texto pode
+              // quebrar em duas linhas dentro da pílula.
+              className="justify-center max-[359px]:text-[0.58rem]! max-sm:h-auto max-sm:min-h-10 max-sm:py-1.5 max-sm:pr-2.5 max-sm:pl-1 max-sm:text-[0.66rem] max-sm:leading-tight max-sm:whitespace-normal lg:max-xl:pr-3 lg:max-xl:text-[0.66rem] max-sm:[&_img]:size-6"
             />
           }
         />

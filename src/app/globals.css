@@ -45,6 +45,7 @@
 
   --font-sans: var(--font-montserrat);
   --font-display: var(--font-montserrat);
+  --font-slogan: var(--font-saira-condensed);
 }
 
 @layer base {

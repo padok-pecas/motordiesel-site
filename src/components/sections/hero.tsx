@@ -1,7 +1,7 @@
 import { BackgroundVideo } from "@/components/ui/background-video";
 import { Container } from "@/components/ui/container";
-import { StoreButton } from "@/components/ui/store-button";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
+import { StoreGlowButton } from "@/components/ui/store-glow-button";
+import { cn } from "@/lib/cn";
 
 export function Hero() {
   return (
@@ -48,31 +48,36 @@ export function Hero() {
 
       <Container className="flex flex-col items-center py-16 text-center sm:py-20">
         {/* Duas frases lado a lado (empilhadas no celular), separadas por um filete, e a
-            assinatura em vermelho embaixo. "do"/"ao" ficam menores, como no layout da marca.
-            Tamanho fluido: acompanha a largura da tela, mas também a altura (notebooks com tela
-            baixa), entre 2rem e 4.5rem. */}
+            assinatura em vermelho embaixo, na Saira Condensed do layout da marca. "do"/"ao" ficam
+            menores. Como no layout, as duas linhas de cada frase têm a mesma largura (Line) e a
+            assinatura ocupa a largura do bloco todo. Tamanho fluido: acompanha a largura da tela,
+            mas também a altura (notebooks com tela baixa), entre 2.75rem e 6rem. */}
         <h1
           id="hero-title"
-          className="animate-rise flex flex-col items-center font-display-wide text-[clamp(2rem,min(6.5vw,9svh),4.5rem)] leading-[0.95] font-extrabold tracking-tight uppercase [animation-delay:80ms]"
+          className="animate-rise inline-flex flex-col font-slogan text-[clamp(2.75rem,min(8.5vw,12svh),6rem)] leading-[0.9] font-bold uppercase [animation-delay:80ms]"
         >
-          <span className="flex flex-col items-center gap-4 sm:flex-row sm:items-stretch sm:gap-8 lg:gap-12">
-            <span className="block">
-              <span className="block">
+          <span className="flex flex-col items-center gap-3 sm:flex-row sm:items-stretch sm:gap-[0.4em]">
+            <span className="flex flex-col">
+              <Line>
                 <Small>do</Small> Leve <Small>ao</Small>
-              </span>{" "}
-              <span className="block">Pesado</span>
+              </Line>{" "}
+              {/* Palavras grandes mais espaçadas para igualar a largura das linhas (medido na
+                  Saira Condensed); a margem negativa anula o espaço depois da última letra. */}
+              <Line>
+                <Wide spacing="0.045em">Pesado</Wide>
+              </Line>
             </span>
-            <span className="hidden w-px bg-white/70 sm:my-[0.35em] sm:block" aria-hidden />{" "}
-            <span className="block">
-              <span className="block">
+            <span className="hidden w-px bg-white/70 sm:my-[0.15em] sm:block" aria-hidden />{" "}
+            <span className="flex flex-col">
+              <Line>
                 <Small>do</Small> Fusível
-              </span>{" "}
-              <span className="block">
-                <Small>ao</Small> Motor
-              </span>
+              </Line>{" "}
+              <Line>
+                <Small>ao</Small> <Wide spacing="0.058em">Motor</Wide>
+              </Line>
             </span>
           </span>{" "}
-          <span className="mt-4 block text-[0.7em] leading-none text-brand sm:mt-5">
+          <span className="mt-3 block text-[0.75em] leading-none text-brand sm:mt-[0.12em] sm:text-[0.78em] sm:[text-align-last:justify]">
             {/* No celular quebra em "Simplesmente / a melhor", sem sobrar uma palavra sozinha. */}
             Simplesmente <br className="sm:hidden" />a melhor
           </span>
@@ -85,17 +90,26 @@ export function Hero() {
           </strong>
         </p>
 
-        <div className="animate-rise mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 [animation-delay:240ms]">
-          {/* Abaixo de 360px os botões não cabiam inteiros numa área de 288px. */}
-          <StoreButton className="max-[359px]:px-4 max-[359px]:text-[0.8rem]" />
-          <WhatsAppButton
-            label="Chama no Zap"
-            className="max-[359px]:px-4 max-[359px]:text-[0.8rem]"
-          />
+        <div className="animate-rise mt-8 flex justify-center [animation-delay:240ms]">
+          <StoreGlowButton label="Compre em nossa loja virtual" size="lg" arrow />
         </div>
       </Container>
     </section>
   );
+}
+
+/** Linha de uma frase: as palavras se espalham até a largura da linha mais longa da coluna. */
+function Line({ className, children }: { className?: string; children: React.ReactNode }) {
+  return (
+    <span className={cn("block whitespace-nowrap [text-align-last:justify]", className)}>
+      {children}
+    </span>
+  );
+}
+
+/** Palavra com espaçamento extra entre as letras, sem sobra depois da última. */
+function Wide({ spacing, children }: { spacing: string; children: React.ReactNode }) {
+  return <span style={{ letterSpacing: spacing, marginRight: `-${spacing}` }}>{children}</span>;
 }
 
 /** Palavras de ligação ("do", "ao") menores, na linha de base das palavras principais. */

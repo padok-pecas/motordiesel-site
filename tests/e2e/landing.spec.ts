@@ -83,7 +83,8 @@ test("produtos são demonstrativos, têm foto e não exibem preço", async ({ pa
   await expect(products.first()).not.toContainText("Demonstrativo");
   await expect(page.locator("#destaques")).not.toContainText("R$");
 
-  const images = page.locator("#destaques li article img");
+  // Fotos dos produtos (o ícone do botão da loja é decorativo, com alt vazio).
+  const images = page.locator('#destaques li article img:not([alt=""])');
   await expect(images).toHaveCount(8);
   for (const alt of await images.evaluateAll((els) => els.map((el) => el.getAttribute("alt")))) {
     expect(alt?.length).toBeGreaterThan(5);

@@ -63,7 +63,7 @@ export function ProductGrid({
         {storeButton && <div className="ml-auto">{storeButton}</div>}
       </div>
 
-      <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+      <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {visible.map((product) => (
           <li key={product.id} data-reveal>
             <article className="group flex h-full flex-col bg-white shadow-[0_1px_0_rgba(18,20,23,0.06)] ring-1 ring-line transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(18,20,23,0.5)]">
@@ -72,7 +72,7 @@ export function ProductGrid({
                   src={product.image}
                   alt={product.imageAlt}
                   fill
-                  sizes="(min-width: 768px) 22vw, 50vw"
+                  sizes="(min-width: 1024px) 22vw, 50vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
               </div>
@@ -81,7 +81,7 @@ export function ProductGrid({
                   {product.category}
                   <span className="text-steel"> · Linha {product.line.toLowerCase()}</span>
                 </p>
-                <h3 className="mt-1.5 font-display-wide text-[0.95rem] leading-tight font-extrabold break-words hyphens-auto text-ink uppercase sm:text-lg">
+                <h3 className="mt-1.5 font-display-wide text-[0.95rem] leading-tight font-extrabold break-words hyphens-auto text-ink uppercase max-[419px]:text-[0.82rem] sm:text-lg lg:text-base xl:text-lg">
                   {product.name}
                 </h3>
                 <p className="mt-1 text-xs text-steel">Imagem ilustrativa</p>
